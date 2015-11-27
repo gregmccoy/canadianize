@@ -10,10 +10,14 @@ import enchant
 import html2text
 import re
 
-def fix_css(content):
+
+def fix_css(content, verse):
     content = content.replace("^CSS_COLOR^", "color=")
     content = content.replace('^CSS_CENTER_1^', '"center"')
     content = content.replace("^CSS_CENTER_2^", "'center'")
+    content = content.replace("mygfa.ca", "mygfa.org")
+    content = content.replace("^CSS_VERSE^", verse)
+
     return content
 
 
@@ -21,15 +25,20 @@ def ignore_css(content):
     content = content.replace("color=", "^CSS_COLOR^")
     content = content.replace('"center"', "^CSS_CENTER_1^")
     content = content.replace("'center'", "^CSS_CENTER_2^")
-    return content
+    verse_index = content.find(' class="verse"')
+    if verse_index != -1 and content.find('</td>') != -1:
+        verse = content[verse_index:content.find('</td>', verse_index)]
+        print(verse)
+        content = content.replace(verse, "^CSS_VERSE^")
+    return verse, content
 
 
 def fix_spelling(content):
     h = html2text.HTML2Text()
     h.ignore_links = True
     h.ignore_images = True
+    verse, content = ignore_css(content)
     raw = h.handle(content)
-    content = ignore_css(content)
     content = links(content)
     raw, content = change(raw, content)
     dictGB = enchant.DictWithPWL("en_CA", "data/words")
@@ -45,7 +54,7 @@ def fix_spelling(content):
             choice = raw_input("Select Replacment\n")
             if choice != "q":
                 content = content.replace(word, new[int(choice)])
-    content = fix_css(content)
+    content = fix_css(content, verse)
     process_content(content)
     return content
 
