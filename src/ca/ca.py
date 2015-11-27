@@ -66,14 +66,18 @@ def is_dst(zonename):
     return now.astimezone(tz).dst() != timedelta(0)
 
 
-def times(content):
+def times(raw, content):
     if is_dst('Canada/Eastern'):
         content = content.replace(" CST", " EDT")
         content = content.replace(" CDT", " EDT")
+        raw = raw.replace(" CST", " EDT")
+        raw = raw.replace(" CDT", " EDT")
     else:
         content = content.replace(" CST", " EST")
         content = content.replace(" CDT", " EST")
-    return content
+        raw = raw.replace(" CST", " EST")
+        raw = raw.replace(" CDT", " EST")
+    return raw, content
 
 def preheader(content):
     header = content[content.find('class="preheader"'):content.find('</span>')]
@@ -105,7 +109,7 @@ def change(raw, content):
             content = content.replace(row[0], row[1])
             raw = raw.replace(row[0], row[1])
     content = preheader(content)
-    content = times(content)
+    raw, content = times(raw, content)
     return raw, content
 
 
