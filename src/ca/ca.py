@@ -16,8 +16,8 @@ def fix_css(content, verse):
     content = content.replace('^CSS_CENTER_1^', '"center"')
     content = content.replace("^CSS_CENTER_2^", "'center'")
     content = content.replace("mygfa.ca", "mygfa.org")
-    content = content.replace("^CSS_VERSE^", verse)
-
+    if verse != None:
+        content = content.replace("^CSS_VERSE^", verse)
     return content
 
 
@@ -30,7 +30,8 @@ def ignore_css(content):
         verse = content[verse_index:content.find('</td>', verse_index)]
         print(verse)
         content = content.replace(verse, "^CSS_VERSE^")
-    return verse, content
+        return verse, content
+    return None, content
 
 
 def fix_spelling(content):
