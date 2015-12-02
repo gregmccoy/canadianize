@@ -10,14 +10,10 @@ import enchant
 import html2text
 import re
 
-
-def fix_css(content, verse):
+def fix_css(content):
     content = content.replace("^CSS_COLOR^", "color=")
     content = content.replace('^CSS_CENTER_1^', '"center"')
     content = content.replace("^CSS_CENTER_2^", "'center'")
-    content = content.replace("mygfa.ca", "mygfa.org")
-    if verse != None:
-        content = content.replace("^CSS_VERSE^", verse)
     return content
 
 
@@ -25,21 +21,15 @@ def ignore_css(content):
     content = content.replace("color=", "^CSS_COLOR^")
     content = content.replace('"center"', "^CSS_CENTER_1^")
     content = content.replace("'center'", "^CSS_CENTER_2^")
-    verse_index = content.find(' class="verse"')
-    if verse_index != -1 and content.find('</td>') != -1:
-        verse = content[verse_index:content.find('</td>', verse_index)]
-        print(verse)
-        content = content.replace(verse, "^CSS_VERSE^")
-        return verse, content
-    return None, content
+    return content
 
 
 def fix_spelling(content):
     h = html2text.HTML2Text()
     h.ignore_links = True
     h.ignore_images = True
-    verse, content = ignore_css(content)
     raw = h.handle(content)
+    content = ignore_css(content)
     content = links(content)
     raw, content = change(raw, content)
     dictGB = enchant.DictWithPWL("en_CA", "data/words")
@@ -55,7 +45,7 @@ def fix_spelling(content):
             choice = raw_input("Select Replacment\n")
             if choice != "q":
                 content = content.replace(word, new[int(choice)])
-    content = fix_css(content, verse)
+    content = fix_css(content)
     process_content(content)
     return content
 
@@ -66,18 +56,14 @@ def is_dst(zonename):
     return now.astimezone(tz).dst() != timedelta(0)
 
 
-def times(raw, content):
+def times(content):
     if is_dst('Canada/Eastern'):
         content = content.replace(" CST", " EDT")
         content = content.replace(" CDT", " EDT")
-        raw = raw.replace(" CST", " EDT")
-        raw = raw.replace(" CDT", " EDT")
     else:
         content = content.replace(" CST", " EST")
         content = content.replace(" CDT", " EST")
-        raw = raw.replace(" CST", " EST")
-        raw = raw.replace(" CDT", " EST")
-    return raw, content
+    return content
 
 def preheader(content):
     header = content[content.find('class="preheader"'):content.find('</span>')]
@@ -109,10 +95,19 @@ def change(raw, content):
             content = content.replace(row[0], row[1])
             raw = raw.replace(row[0], row[1])
     content = preheader(content)
-    raw, content = times(raw, content)
+    content = times(content)
+    raw, content = replace_source_codes(raw, content, get_source_codes(content))
     return raw, content
 
-
+def replace_source_codes(raw, content, codes):
+    for code in codes:
+        choice = raw_input("Replace Source Code - " + str(code) + " ? (y/n)")
+        if choice == "y":
+            source = raw_input("Enter new source code: ")
+            content = content.replace(code, source)
+            raw.replace(code, source)
+    return raw, content
+        
 def get_source_codes(code):
     motivs = []
 
@@ -153,7 +148,6 @@ def get_images(code):
         "http://www.gfamedia.org/email/digest/sponsor-footer-3.jpg",
         "http://www.gfamedia.org/ca/email/digest/gospel-for-asia-digest-header-3.gif",
         "http://www.gfamedia.org/ca/email/digest/tagline.gif",
-        "{{ spot.image }}",
         "http://www.gfamedia.org/ca/email/digest/share-fb.gif",
         "http://www.gfamedia.org/ca/email/digest/share-twitter.gif",
         "http://www.gfamedia.org/ca/email/digest/find-fb.gif",
@@ -216,7 +210,7 @@ def process_content(content):
         with open("data/result.html", 'w+') as o:
             o.write(html)
             webbrowser.open('file://' + os.path.realpath("data/result.html"), new=2)
-        
+
 
 def read_file(infile, outfile):
     content = ""
@@ -228,7 +222,19 @@ def read_file(infile, outfile):
     with open(outfile, 'w+') as o:
         o.write(content)
     webbrowser.open('file://' + os.path.realpath(outfile), new=2)
-    
+    loop = True
+    while loop:
+        print("Select Option")
+        print("r - reload results page")
+        print("q - Quit")
+        choice = raw_input()
+        
+        if choice == "r":
+            with open(outfile, 'r') as f:
+                content = f.read()
+                process_content(content)
+        else:
+            loop = False;
 
 #Check for command line
 parser = argparse.ArgumentParser()
