@@ -85,8 +85,9 @@ def links(content):
         for row in reader:
             replaces.append(row)
     for row in replaces:
-        print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
-        content = content.replace(row[0], row[1])
+        if content.find(row[0]) != -1:
+            print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
+            content = content.replace(row[0], row[1])
     return content
     
 
@@ -208,13 +209,14 @@ def process_content(content):
     links = get_links(content)
     codes = get_source_codes(content)
     images = get_images(content)
-    if not is_salu(content):
-        print("* WARNING NO SALU DETECTED *")
     with open("data/template.html", 'r') as f:
         html = f.read()
         html = html.replace("*LINKS*", make_table(links))
         html = html.replace("*SOURCE*", make_table(codes))
         html = html.replace("*IMAGES*", image_table(images))
+        if not is_salu(content):
+            print("* WARNING NO SALU DETECTED *")
+            html = html.replace("Salu found", "* WARNING NO SALU DETECTED *")
 
         with open("data/result.html", 'w+') as o:
             o.write(html)
