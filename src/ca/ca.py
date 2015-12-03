@@ -23,7 +23,10 @@ def ignore_css(content):
     content = content.replace("'center'", "^CSS_CENTER_2^")
     return content
 
-
+def is_salu(content):
+    if content.find("%%SALU%%") != -1:
+        return True
+    return False
 def fix_spelling(content):
     h = html2text.HTML2Text()
     h.ignore_links = True
@@ -205,6 +208,8 @@ def process_content(content):
     links = get_links(content)
     codes = get_source_codes(content)
     images = get_images(content)
+    if not is_salu(content):
+        print("* WARNING NO SALU DETECTED *")
     with open("data/template.html", 'r') as f:
         html = f.read()
         html = html.replace("*LINKS*", make_table(links))
@@ -226,7 +231,6 @@ def read_file(infile, outfile):
     with open(outfile, 'w+') as o:
         o.write(content)
     webbrowser.open('file://' + os.path.realpath(outfile), new=2)
-    webbrowser.open('view-source:file://' + os.path.realpath(outfile), new=2)
     loop = True
     while loop:
         print("Select Option")
