@@ -1,4 +1,4 @@
-Canadianization Script
+Matthew Script
 
 This script automatically replaces text in American emails with the Canadian equivalent, this includes phone number, address, links and changes American spelling to the Canadian spelling.
 

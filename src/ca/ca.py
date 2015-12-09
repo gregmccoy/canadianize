@@ -14,6 +14,7 @@ def fix_css(content):
     content = content.replace("^CSS_COLOR^", "color=")
     content = content.replace('^CSS_CENTER_1^', '"center"')
     content = content.replace("^CSS_CENTER_2^", "'center'")
+    content = content.replace("^MYGFA^", "mygfa.org")
     return content
 
 
@@ -21,6 +22,7 @@ def ignore_css(content):
     content = content.replace("color=", "^CSS_COLOR^")
     content = content.replace('"center"', "^CSS_CENTER_1^")
     content = content.replace("'center'", "^CSS_CENTER_2^")
+    content = content.replace("mygfa.org", "^MYGFA^")
     return content
 
 def is_salu(content):
@@ -31,7 +33,7 @@ def fix_spelling(content):
     h = html2text.HTML2Text()
     h.ignore_links = True
     h.ignore_images = True
-    raw = h.handle(content)
+    raw = h.handle(content.decode('utf8'))
     content = ignore_css(content)
     content = links(content)
     raw, content = change(raw, content)
@@ -44,6 +46,8 @@ def fix_spelling(content):
             print("Non-Canadian Word - *" + word + "* Replace with? ")
             for counter, option in enumerate(new):
                 print(str(counter) + " - " + option)
+                if counter > 10:
+                    break;
             print("Don't replace - q")
             choice = raw_input("Select Replacment\n")
             if choice != "q":
@@ -223,16 +227,21 @@ def process_content(content):
             webbrowser.open('file://' + os.path.realpath("data/result.html"), new=2)
 
 
-def read_file(infile, outfile):
+def read_file(infile, outfile, result):
     content = ""
-    with open(infile, 'r') as f:
-        content = f.read()
-        content = fix_spelling(content)
     if not outfile:
         outfile = "ca-" + infile
-    with open(outfile, 'w+') as o:
-        o.write(content)
-    webbrowser.open('file://' + os.path.realpath(outfile), new=2)
+    if not result:
+        with open(infile, 'r') as f:
+            content = f.read()
+            content = fix_spelling(content)
+        with open(outfile, 'w+') as o:
+            o.write(content)
+        webbrowser.open('file://' + os.path.realpath(outfile), new=2)
+    else:
+        with open(outfile, 'r') as f:
+            content = f.read()
+            process_content(content)
     loop = True
     while loop:
         print("Select Option")
@@ -251,5 +260,6 @@ def read_file(infile, outfile):
 parser = argparse.ArgumentParser()
 parser.add_argument("input", help="Enter input filename")
 parser.add_argument("-o", dest='outfile', help="optional output file. Defaults to ca + input filename if not set", metavar="outfile")
+parser.add_argument("-r", "--result", help="only load the result page, does not canadainize email", action="store_true")
 args = parser.parse_args()
-read_file(args.input, args.outfile)
+read_file(args.input, args.outfile, args.result)
