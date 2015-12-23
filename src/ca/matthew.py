@@ -39,6 +39,18 @@ class Matthew(object):
         self.content = self.content.replace(header, line)
         return self.content
 
+    def links(self):
+        replaces = []
+        with open("data/links.csv") as f:
+            reader = csv.reader(f, delimiter='|')
+            for row in reader:
+                replaces.append(row)
+        for row in replaces:
+            if self.content.find(row[0]) != -1:
+                print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
+                self.content = self.content.replace(row[0], row[1])
+        return 0
+
 
     def fix_css(self):
         for key, value in self.ignores.iteritems():

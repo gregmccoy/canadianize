@@ -5,7 +5,7 @@ from matthew import Matthew
 class Job(object):
     
     def __init__(self):
-        print("Hello")
+        print("")
 
     def get_raw(self, content):
         h = html2text.HTML2Text()
@@ -22,6 +22,7 @@ class Job(object):
         content = self.read_file(infile)
         matthew = Matthew(content, self.get_raw(content))
         matthew.ignore_css()
+        matthew.links()
         matthew.change()
         matthew.preheader()
         matthew.times()
