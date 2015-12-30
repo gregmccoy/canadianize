@@ -71,6 +71,8 @@ class Matthew(object):
 
 
     def times(self):
+        if self.content.find("CST") != -1 or self.content.find("CDT") != -1:
+            print("* Handling CST/CDT")
         if self.is_dst:
             self.content = self.content.replace(" CST", " EDT")
             self.content = self.content.replace(" CDT", " EDT")
