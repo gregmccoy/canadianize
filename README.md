@@ -3,16 +3,14 @@ Matthew Script
 This script automatically replaces text in American emails with the Canadian equivalent, this includes phone number, address, links and changes American spelling to the Canadian spelling.
 
 ```
-usage: ca.py [-h] [-o outfile] [-r] input
-
-positional arguments:
-  input         Enter input filename
+usage: ca.py [-h] [-f input] [-o outfile] [-u url] [-a]
 
 optional arguments:
-  -h, --help    show this help message and exit
-  -o outfile    optional output file. Defaults to ca + input filename if not
-                set
-  -r, --result  only load the result page, does not canadainize email
+  -h, --help  show this help message and exit
+  -f input    Enter input filename
+  -o outfile  optional output file. Defaults to ca + input filename if not set
+  -u url      specifies the input is a url
+  -a          used to check an article
 ```
 
 Install file probably doesn't work yet

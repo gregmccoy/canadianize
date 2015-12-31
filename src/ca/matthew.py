@@ -136,9 +136,11 @@ class Matthew(object):
         links = []
         code = self.content
         for i in range(0, code.count("<a ")):
-            link = code.split("<a ")[i + 1].split("</a>")[0].split('href="')[1].split('"')[0]
-    
-            links.append(link)
+            try:
+                link = code.split("<a ")[i + 1].split("</a>")[0].split('href="')[1].split('"')[0]
+                links.append(link)
+            except Exception as e:
+                print("Failed to record a link\n---\n" + str(e) + "\n---")
         return sorted(list(set(links)))
 
 
@@ -198,6 +200,18 @@ class Matthew(object):
                 ))
     
         return images
+    
+    def remove_images(self):
+        while self.content.find("<img") != -1:
+            self.content = self.content.replace(self.content[self.content.find("<img"):(self.content.find(">", self.content.find("<img"))+1)], "")
+        return 0
+    
+    def remove_js(self):
+        print("Hello")
+        while self.content.find("<script") != -1:
+            print(self.content[self.content.find("<script"):(self.content.find("</script>", self.content.find("<script"))+9)])
+            self.content = self.content.replace(self.content[self.content.find("<script"):(self.content.find("</script>", self.content.find("<script"))+9)], "")
+        return 0
     
     def make_table(self, items):
         table_str = ""
