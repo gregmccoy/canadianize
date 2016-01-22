@@ -6,6 +6,7 @@ import re
 
 class Matthew(object):
 
+    
     def __init__(self, content=None, raw=None, input_type="email"):
         self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", 'center':"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
         tz = pytz.timezone('Canada/Eastern')
@@ -110,10 +111,12 @@ class Matthew(object):
         for row in self.replaces:
             if self.raw.find(row[0]) != -1:
                 print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
+
                 if self.input_type == "article":
                     self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
                 else:
                     self.content = self.content.replace(row[0], row[1])
+                
                 self.raw = self.raw.replace(row[0], row[1])
         return 0
 
