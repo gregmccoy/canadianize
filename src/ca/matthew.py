@@ -6,9 +6,8 @@ import re
 
 class Matthew(object):
 
-    
-    def __init__(self, content=None, raw=None, input_type="email"):
-        self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", 'center':"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
+    def __init__(self, content=None, raw=None, input_type="email", verbose=False):
+        self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
         tz = pytz.timezone('Canada/Eastern')
         now = pytz.utc.localize(datetime.utcnow())
         self.is_dst = now.astimezone(tz).dst() != timedelta(0)
@@ -21,7 +20,8 @@ class Matthew(object):
         self.content = content
         self.raw = raw
         self.input_type = input_type
-
+        self.debug = verbose
+        print(verbose)
 
     def set_content(self, content):
         self.content = content
@@ -36,7 +36,7 @@ class Matthew(object):
 
 
     def preheader(self):
-        header = self.content[self.content.find('class="preheader"'):self.content.find('</span>')]
+        header = self.content[self.content.find('class="preheader"')-100:self.content.find('</span>')]
         line = header.replace("#333333", "#edf1f5")
         self.content = self.content.replace(header, line)
         return self.content
@@ -86,8 +86,8 @@ class Matthew(object):
             self.raw = self.raw.replace(" CST", " EST")
             self.raw = self.raw.replace(" CDT", " EST")
         return 0
-    
-    
+
+
     def get_source_codes(self):
         motivs = []
         for i in range(0, self.content.count("motiv=")):
@@ -101,7 +101,7 @@ class Matthew(object):
         for code in codes:
             choice = raw_input("Replace Source Code - " + str(code) + " ? (y/n)")
             if choice == "y":
-                source = raw_input("Enter new source code: ")
+                source = input("Enter new source code: ")
                 self.content = self.content.replace(code, source)
                 self.raw.replace(code, source)
         return 0
@@ -111,13 +111,17 @@ class Matthew(object):
         for row in self.replaces:
             if self.raw.find(row[0]) != -1:
                 print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
-
+                if self.debug:
+                    print('+ Input Type = ' + str(self.input_type))
                 if self.input_type == "article":
                     self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
                 else:
                     self.content = self.content.replace(row[0], row[1])
-                
                 self.raw = self.raw.replace(row[0], row[1])
+                if self.debug:
+                    print("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0])))
+                    print("+ Search Content for replaced content Result = " + str(self.content.find(row[0])))
+                    print("\n")
         return 0
 
 
@@ -194,41 +198,41 @@ class Matthew(object):
         code = self.content
         for i in range(0, code.count("<img")):
             image = code.split("<img")[i + 1].replace('alt="-->"', '').split(">")[0]
-    
+
             try:
                 image_url = image.split('src="')[1].split('"')[0]
             except:
                 image_url = ""
-    
+
             try:
                 alt = image.split('alt="')[1].split('"')[0]
             except:
                 alt = None
-    
+
             if image_url not in ignore_images:
                 images.append(dict(
                     src=image_url,
                     alt=alt,
                 ))
-    
+
         return images
-    
+
     def remove_images(self):
         while self.content.find("<img") != -1:
             self.content = self.content.replace(self.content[self.content.find("<img"):(self.content.find(">", self.content.find("<img"))+1)], "")
         return 0
-    
+
     def remove_js(self):
         while self.content.find("<script") != -1:
             self.content = self.content.replace(self.content[self.content.find("<script"):(self.content.find("</script>", self.content.find("<script"))+9)], "")
         return 0
-    
+
     def make_table(self, items):
         table_str = ""
         for i in items:
             table_str += "<tr><td>" + str(i) + "</td></tr>"
         return table_str
-    
+
     def image_table(self, items):
         table_str = ""
         for i in items:
