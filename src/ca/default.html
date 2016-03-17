@@ -1,608 +1,1074 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie natural-sizing gfafonts" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie natural-sizing gfafonts" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie natural-sizing gfafonts" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie natural-sizing gfafonts" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js natural-sizing gfafonts" lang="en"> <!--<![endif]-->
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">    <!-- So that mobile webkit will display zoomed in -->
-    <meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
-  </head>
+
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   
-  <body style="background-color:#edf1f5;">
-    <style type="text/css">
-      /* Client-specific Styles */
-      #outlook a{padding:0;} /* Force Outlook to provide a "view in browser"
-      button. */
-      .ExternalClass *{line-height:100%;} /*Forces Outlook.com line-height */
-      body{width:100% !important;} /* Force Hotmail to display emails at full
-      width */
-      body{-webkit-text-size-adjust:none;} /* Prevent Webkit platforms from
-      changing default text sizes. */
-      
-      body {
-        background: #edf1f5;
-        background-repeat: repeat; 
-        margin: 0;
-        padding: 0;
-      }
-      
-      table {border-collapse:collapse;} /*removes table gaps in Outlook
-      2017/2010 */
-      table, td {mso-table-lspace:0pt; mso-table-rspace:0pt;}/* Remove spacing
-      between tables in Outlook 2017 and up. */
-      .yshortcuts a {border-bottom: none !important;}
-      img{-ms-interpolation-mode: bicubic;} /* Force IE to smoothly render
-      resized images. */
-      body, table, td, p, a, li, blockquote{-ms-text-size-adjust:100%;
-        -webkit-text-size-adjust:100%;} /* Prevent Windows- and Webkit-based mobile platforms
-      from changing declared text sizes. */
-      
-      /* Reset Styles */
-      body{margin:0; padding:0;}
-      img{border:none; font-size:14px; font-weight:bold; line-height:100%;
-        outline:none; text-decoration:none; text-transform:capitalize; vertical-align:
-        middle;}
-      #backgroundTable{height:100% !important; margin:0; padding:0; width:100% !important;}
-      .ReadMsgBody { width: 100%; background-color: #ffffff;}
-      .ExternalClass {width: 100%; background-color: #ffffff;}
-      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass
-      font, .ExternalClass td, .ExternalClass div {line-height:100%;}
-      
-      /* GFA Styles */
-      a:link, a:hover, a:active, a:visited {
-        color: #3333cc; text-decoration: underline;
-      }
-      
-      a.title{
-        font-weight: 600;
-        font-size: 14px;    
-      }
-      
-      p {
-        margin: 0 0 8px 0;
-        line-height: 16px;
-        font-family:  Arial, Verdana, Helvetica, sans-serif;
-      }
-      
-      table, td, th {
-        padding: 0;
-        line-height: 16px;
-        font-family: Arial, Verdana, Helvetica, sans-serif;
-        font-size: 13px;
-      }
-      
-      table.textblock{ margin-top: 5px; }
-      
-      td[class=addressinfo] {
-        line-height:24px;
-        font-size:10px;
-      }
-      
-      td[class="footer"] {
-        padding-top:-8px;
-      }
-      
-      p[class="social"] {
-        padding-bottom: 10px;
-      }
-      
-      /*Resize to screen if <500px*/
-      @media only screen and (max-width: 500px){
-        table[class=hidemobile]{ display: none; }
-        table[class=containertable]{ width: 100% !important; }
-        img[class=borderleft]{ display: none; }
-        img[class=borderright]{ display: none; }
-        td[class=contentcell]{ width:90% }
-        img[class=imgscale]{ width: 100%; }
-        td[id=headerimage] img { width: 100%; }
-        .hidemobile, .hidedash, .hide { display: none; }
-        .rwdbrk {display: block; line-height: 19px; font-size:14px; }
-        .preheader {line-height:8px !important; font-size:8px;}
-        
-        .buttonadd {
-          background-color: #2d87c6;
-        }
-        
-        .sponsor, .buttonadd {
-          padding-top:10px;
-          padding-bottom: 10px;
-          padding-left:15px;
-          padding-right: 15px;
-          background-color: #24698c;
-          color: #ffffff !important;
-          text-align: centre !important;
-          text-decoration: none !important;
-          -webkit-border-radius: 6px;
-          -moz-border-radius: 6px;
-          border-radius: 6px !important;
-          font-size:14px !important;
-          letter-spacing: .2px;
-          font-weight: 700;
-        }
-        
-        .sponsor:active, .buttonadd {
-          background-color: #24698c;
-          color: #ffffff;
-        }
-        
-        table[class=textblock]{
-          display:block;
-          width:100%;             
-        }
-        
-        table[class=imgblock]{
-          display:block;
-          width:100%;
-          margin-bottom:8px;
-          text-align: centre;
-        }
-        
-        table[class=imgblock] td {
-          text-align: centre;
-        }
-        
-        td[class=artimg] img{
-          width: 100% !important;
-          margin-left:auto;
-          margin-right:auto;
-        }
-        
-        td[class=textblocking] {
-          display: block;
-          width: 100% !important;
-          padding-top:19px;
-          padding-bottom:10px;
-          text-align: centre;
-          font-size:15px;
-          font-weight:600;
-        }
-        
-        td[class=foot] table {
-          width:100% !important;
-        }
-        
-        td[class=nomore] {
-          display:none;
-        }
-        
-        img[class=spacer]{
-          width: 100%;
-          height: 20px;
-          padding-bottom: 7px;
-          padding-top: 8px;
-        }
-        
-        td[class=addressinfo]{ /*Resize text < Apple's default min*/
-          color: #333333;
-          padding-left: 8px;
-          padding-right: 8px;
-          padding-bottom:5px;
-          line-height:18px;
-          font-size:14px;
-        }
-        
-        span.social {
-          display:block;
-          padding-top:8px;
-          padding-bottom:3px;
-        }
-        
-        img[id=imghide] {display: none !important;}
-        
-        p[class=blocks] {
-          display: block;
-          width: 100%;
-        }
-      }
-    </style>
     
-    <table class="containertable" width="600" cellpadding="0" cellspacing="0" align="center" bgcolor="#ffffff" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-      <!--Header-->
-      <tr style="background-color: #edf1f5;">
-        <td colspan="3" id="headerimage">
-          <span class="preheader" style="text-align:left; color: #edf1f5; font-size:10px; background-color: #edf1f5;">Even though Aayan was doing well in school, something wasn't quite right . . . 	</span><br class="hide"><a name="www_gfa_org__motiv_WB62_G400" href="http://www.gfa.ca/?motiv=WB62-G400" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_email-digest-header.gif" src="http://www.gfamedia.org/email/digest/email-digest-header.gif" alt="News and Feature Articles from the Field" class="imgscale" style="display: block; font-family: Arial; color: #333333; font-size: 13px;" border="0" spname="http:__www.gfamedia.org_email_digest_email-digest-header.gif" ></a>
-        </td>
-      </tr>
-      <!--End Header-->
       
-      <tr>
-        <!--Left border -->
-        <td width="25" valign="top"><!--<img id="imghide"  name="Cont_14" src="http://www.gfamedia.org/email/digest/208/digest-whiteside.gif" class="imgscale">--></td>
-        <!--End Left Border-->
-        
-        <!--Content container cell -->
-        <td width="550" class="contentcell">
-          <table align="center" class="textblock" width="548" cellpadding="0" cellspacing="0">
-            <tr>
-              <td>
-                <!--Salutation-->
-                <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                  <tr>
-                    <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                      <strong>Dear %%SALU%%,</strong>
-                    </td>
-                  </tr>
-                </table>
-                <!--End Salutation-->
-                
-                  
-                    <!--Headline ARTICLE -->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <!--Headline TEXT here-->
-                          <table class="textblock" align="left" width="250" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                The staff at the Bridge of Hope centre saw Ayaan's sadness over his parents' physical struggles. Ayaan often prayed to Jesus for his parents when he was at the centre, but he didn't tell the Bridge of Hope staff about his own problem.<br><br>
-                                <centre><a name="www_gfa_org_news_articles_when" href="http://www.gfa.ca/news/articles/when-they-uncovered-the-students-secret/?motiv=WB62-G400" class="buttonadd" style="text-align:centre;" xt="SPCLICK"><strong>Read what happened<span class="hide">.</span></strong></a><br><br></centre>
-                              </td>
-                            </tr>
-                          </table>
-                          <!--End Headline TEXT-->
-                          
-                          <!--Headline IMAGE-->
-                          <table class="textblock" align="right" width="250" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:1px;">
-                                <a name="www_gfa_org_news_articles_when" href="http://www.gfa.ca/news/articles/when-they-uncovered-the-students-secret/?motiv=WB62-G400" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-1wide.jpg" src="http://www.gfamedia.org/email/digest/311/gospel-for-asia-digest-1wide.jpg" border="0" width="275" align="center" class="pushright" alt="Read what happened" style="display:block; font-family: Arial; color: #333333; font-size: 13px; padding-bottom:4px;" spname="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-1wide.jpg" ></a>
-                              </td>
-                            </tr>
-                          </table>
-                          <!--End Headline IMAGE-->
-                          
-                        </td>
-                      </tr>
-                    
-                        <tr>
-                          <td>
-                            <img  name="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" src="http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif" class="spacer" spname="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" >
-                          </td>
-                        </tr>
-                      </table>
-                      <!--End Spacer-->
-                      
-                      <!--Sub-Article 1-->
-                      <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                        <tr>
-                          <td align="center" class="verse" style="font-size:17px; font-family:Georgia; color:#777777; background-color:#f8f7f1; line-height:22px; padding:0 20px 9px 20px;">
-                            <br>"God is our refuge and strength, a very present help in trouble."<br><span style="font-size:12px; font-family:Arial; color:#333333;">&mdash;</span> <span class="appleLink" style="font-size:12px; font-family:Arial; color:#333333;">Psalm 46:1</span>
-                          </td>
-                        </tr>
-                      </table>
-                      <!--End Sub-Article 1-->
-
-                  <!--Spacer-->
-                  <table>
-                    <tr>
-                      <td>
-                        <p><img  name="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" src="http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif" class="spacer" spname="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" ></p>
-                      </td>
-                    </tr>
-                  </table>
-                  <!--End Spacer-->
-
-                    <!--Sub-Article 2-->
-                    <!--Sub-Article Header-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <a name="gospelforasia_reports_org_2016" class="title" style="color:#3e3e3e; text-decoration:none; line-height:1.4em;" href="http://gospelforasia-reports.org/2016/02/when-unexpected-gifts-come-squawking/?motiv=WB62-G400" xt="SPCLICK"><strong>Field Story: Unexpected Gifts Come . . . Squawking</strong></a>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article Header-->
-                    
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <!--Sub-Article IMAGE-->
-                          <table class="textblock" align="left" width="250" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="gospelforasia_reports_org_2016" href="http://gospelforasia-reports.org/2016/02/when-unexpected-gifts-come-squawking/?motiv=WB62-G400" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2a.jpg" src="http://www.gfamedia.org/email/digest/311/gospel-for-asia-digest-2a.jpg" border="0" align="middle" alt="Field Story: Unexpected Gifts" style="font-family: Arial; color: #333333; font-size: 13px;" spname="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2a.jpg" ></a>
-                              </td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article IMAGE-->
-                          
-                          <!--Sub-Article TEXT-->
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">Through gifts from people around the world, so many people in Asia, like these 10 widows, now have a way to make a living for themselves. See how four women missionaries were able to make a difference and show Christ's love through a simple gift: chickens.</td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article TEXT-->
-                          
-                        </td>
-                      </tr>
-                    </table>
-                    
-                    <!--Sub-Article LINK-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="gospelforasia_reports_org_2016" href="http://gospelforasia-reports.org/2016/02/when-unexpected-gifts-come-squawking/?motiv=WB62-G400" class="buttonadd" xt="SPCLICK"><strong>Read their story<span class="hide">.</span></strong></a>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article LINK-->
-                    <!--End Sub-Article 2-->
-                  
-                  
-                  <!--Spacer-->
-                  <table>
-                    <tr>
-                      <td>
-                        <p><img  name="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" src="http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif" class="spacer" spname="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" ></p>
-                      </td>
-                    </tr>
-                  </table>
-                  <!--End Spacer-->
-                
-                  
-                    <!--Sub-Article 2-->
-                    <!--Sub-Article Header-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <a name="www_gfa_org_pray_boh__motiv_WB" class="title" style="color:#3e3e3e; text-decoration:none; line-height:1.4em;" href="http://www.gfa.ca/pray/boh/?motiv=WB62-G400" xt="SPCLICK"><strong>Pray for Bridge of Hope Children</strong></a>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article Header-->
-                    
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <!--Sub-Article IMAGE-->
-                          <table class="textblock" align="left" width="250" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="www_gfa_org_pray_boh__motiv_WB" href="http://www.gfa.ca/pray/boh/?motiv=WB62-G400" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2b.jpg" src="http://www.gfamedia.org/email/digest/311/gospel-for-asia-digest-2b.jpg" border="0" align="middle" alt="Pray for Bridge of Hope" style="font-family: Arial; color: #333333; font-size: 13px;" spname="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2b.jpg" ></a>
-                              </td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article IMAGE-->
-                          
-                          <!--Sub-Article TEXT-->
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">On their first day at a Bridge of Hope centre, many children come with very little clothing, empty stomachs and little to no prior access to education. On top of this, society has often made them feel that they are worthless. Please ask God to help these precious children as they study, learn life skills and find healing in His love.</td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article TEXT-->
-                          
-                        </td>
-                      </tr>
-                    </table>
-                    
-                    <!--Sub-Article LINK-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="www_gfa_org_pray_boh__motiv_WB" href="http://www.gfa.ca/pray/boh/?motiv=WB62-G400" class="buttonadd" xt="SPCLICK"><strong>Pray for the Bridge of Hope children<span class="hide">.</span></strong></a>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article LINK-->
-                    <!--End Sub-Article 2-->
-                  
-                  
-                  <!--Spacer-->
-                  <table>
-                    <tr>
-                      <td>
-                        <p><img  name="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" src="http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif" class="spacer" spname="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" ></p>
-                      </td>
-                    </tr>
-                  </table>
-                  <!--End Spacer-->
-                
-                  
-                    <!--Sub-Article 2-->
-                    <!--Sub-Article Header-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <a name="www_gfa_org_resource_detail_di" class="title" style="color:#3e3e3e; text-decoration:none; line-height:1.4em;" href="http://www.gfa.ca/resource/detail/discouragement-reasons-and-answers/?motiv=WB62-G400" xt="SPCLICK"><strong>Free E-book: "Discouragement: Reasons and Answers"</strong></a>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article Header-->
-                    
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <!--Sub-Article IMAGE-->
-                          <table class="textblock" align="left" width="250" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="www_gfa_org_resource_detail_di" href="http://www.gfa.ca/resource/detail/discouragement-reasons-and-answers/?motiv=WB62-G400" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2c.jpg" src="http://www.gfamedia.org/email/digest/311/gospel-for-asia-digest-2c.jpg" border="0" align="middle" alt="Free E-book" style="font-family: Arial; color: #333333; font-size: 13px;" spname="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2c.jpg" ></a>
-                              </td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article IMAGE-->
-                          
-                          <!--Sub-Article TEXT-->
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">Maybe at times you feel worthless, unappreciated or misunderstood. By God's grace, you can move past these traps of the enemy and see things from God's perspective. In K.P. Yohannan's booklet on discouragement, he gives practical insight on how to overcome and live victoriously.</td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article TEXT-->
-                          
-                        </td>
-                      </tr>
-                    </table>
-                    
-                    <!--Sub-Article LINK-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="www_gfa_org_resource_detail_di" href="http://www.gfa.ca/resource/detail/discouragement-reasons-and-answers/?motiv=WB62-G400" class="buttonadd" xt="SPCLICK"><strong>Download the free e-book<span class="hide">.</span></strong></a>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article LINK-->
-                    <!--End Sub-Article 2-->
-                 <!--Spacer-->
-                  <table>
-                    <tr>
-                      <td>
-                        <p><img  name="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" src="http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif" class="spacer" spname="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" ></p>
-                      </td>
-                    </tr>
-                  </table>
-                  <!--End Spacer-->
-                   <!--Sub-Article 2-->
-                    <!--Sub-Article Header-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <a name="www_facebook_com_media_set__se" class="title" style="color:#3e3e3e; text-decoration:none; line-height:1.4em;" href="https://www.facebook.com/media/set/?set=a.10153968761878259.1073741838.28889108258&type=3?motiv=WB62-G400" xt="SPCLICK"><strong>See Pastor Nateshwar's Story in Photos</strong></a>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article Header-->
-                    
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <!--Sub-Article IMAGE-->
-                          <table class="textblock" align="left" width="250" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="www_facebook_com_media_set__se" href="https://www.facebook.com/media/set/?set=a.10153968761878259.1073741838.28889108258&type=3?motiv=WB62-G400" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2d.jpg" src="http://www.gfamedia.org/email/digest/311/gospel-for-asia-digest-2d.jpg" border="0" align="middle" alt="Pastor Nateshwar's Story in Photos" style="font-family: Arial; color: #333333; font-size: 13px;" spname="http:__www.gfamedia.org_email_digest_311_gospel-for-asia-digest-2d.jpg" ></a>
-                              </td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article IMAGE-->
-                          
-                          <!--Sub-Article TEXT-->
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">Nateshwar has ministered to those around him for more than 15 years. Through his display of God's love, dozens of people have responded to Christ's grace. You can see the photo album and read his story on our Facebook page.</td>
-                            </tr>
-                          </table>
-                          <!--End Sub-Article TEXT-->
-                          
-                        </td>
-                      </tr>
-                    </table>
-                    
-                    <!--Sub-Article LINK-->
-                    <table class="textblock" align="center" width="548" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                      <tr>
-                        <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                          <table class="textblock" align="right" width="270" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding-left:5px;">
-                            <tr>
-                              <td style="line-height: 19px; font-size:13px; padding-bottom:10px;">
-                                <a name="www_facebook_com_media_set__se" href="https://www.facebook.com/media/set/?set=a.10153968761878259.1073741838.28889108258&type=3?motiv=WB62-G400" class="buttonadd" xt="SPCLICK"><strong>See the photo album on Facebook<span class="hide">.</span></strong></a>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                    <!--End Sub-Article LINK-->
-                    <!--End Sub-Article 2-->
-                  
-                  
-                  <!--Spacer-->
-                  <table>
-                    <tr>
-                      <td>
-                        <img  name="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" src="http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif" class="spacer" spname="http:__www.gfamedia.org_email_digest_gospel-for-asia-digest-break.gif" >
-                      </td>
-                    </tr>
-                  </table>
-                  <!--End Spacer-->
-                <br>
-              </td>
-              <!--End Content container cell-->
-            </tr>
-            <tr>
-            <td style="background-color:#ffffff;" bgcolor="#ffffff" class="foot">
-              <!-- Action items -->
-              <table bgcolor="#f5f8fa" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                <tr height="55">
-                  <td width="16">&nbsp;</td>
-                    <!--Missionary-->
-                    <td width="52" class="hide">
-                      <a name="www_gfa_org_sponsor_search__mo" href="http://www.gfa.ca/sponsor/search/?motiv=WB60-G1NM&c=3" xt="SPCLICK"> <img  name="http:__www.gfamedia.org_email_digest_sponsor-footer-1.jpg" src="http://www.gfamedia.org/email/digest/sponsor-footer-1.jpg" border="0" alt="National Missionary" style="display: block; font-family: Arial; color: #333333; font-size: 11px;" spname="http:__www.gfamedia.org_email_digest_sponsor-footer-1.jpg" > </a></td>
-                    <td width="114" align="center" valign="middle" class="textblocking">
-                      <p style="font-size:11px; line-height:14px;" ><a name="www_gfa_org_sponsor_search__mo" href="http://www.gfa.ca/sponsor/search/?motiv=WB60-G1NM&c=3" class="" xt="SPCLICK">Sponsor a National Missionary</a></p>
-                    </td>
-                    <!--Woman missionary-->
-                    <td width="52" class="hide">
-                      <a name="www_gfa_org_women_sponsor__mot" href="http://www.gfa.ca/women/sponsor/?motiv=WB60-G1WS&c=3" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_sponsor-footer-2.jpg" src="http://www.gfamedia.org/email/digest/sponsor-footer-2.jpg" border="0" alt="Woman Missionary" style="display: block; font-family: Arial; color: #333333; font-size: 11px;" spname="http:__www.gfamedia.org_email_digest_sponsor-footer-2.jpg" /></a>
-                    </td>
-                    <td width="114px" align="center" valign="middle" class="textblocking">
-                      <p style="font-size: 11px; line-height: 14px;"><a name="www_gfa_org_women_sponsor__mot" href="http://www.gfa.ca/women/sponsor/?motiv=WB60-G1WS&c=3" class="" xt="SPCLICK">Sponsor a Woman Missionary</a></p>
-                    </td>
-                    <!--Bridge of Hope-->
-                    <td width="52" class="hide">
-                      <a name="www_gfa_org_sponsorachild_choo" href="http://www.gfa.ca/sponsorachild/choose/?motiv=WB60-G1BH&c=3" xt="SPCLICK"><img  name="http:__www.gfamedia.org_email_digest_sponsor-footer-3.jpg" src="http://www.gfamedia.org/email/digest/sponsor-footer-3.jpg" border="0" alt="Bridge of Hope Child" style="display: block; font-family: Arial; color: #333333; font-size: 11px;" spname="http:__www.gfamedia.org_email_digest_sponsor-footer-3.jpg" /> </a></td>
-                    <td width="114" align="center" valign="middle" class="textblocking">
-                      <p style="font-size: 11px; line-height: 14px;"><a name="www_gfa_org_sponsorachild_choo" href="http://www.gfa.ca/sponsorachild/choose/?motiv=WB60-G1BH&c=3" class="" xt="SPCLICK">Sponsor a Child</a></p>
-                    </td>
-                    <td width="16">&nbsp;</td>
-                  </tr>
-                </table><!--/Action items-->
-              </td>
-            </tr>
-          </table>
-        </td>
-        
-        <!--Right border -->
-        <td width="25" class="borderright" valign="top"><!--<img id="imghide"  name="Cont_15" src="http://www.gfamedia.org/email/digest/208/digest-whiteside-right.gif" class="imgscale">--></td>
-        <!--End Right border-->
-      </tr>
       
-      <!--Footer-->
-      <tr>
-        <td align="center" valign="middle" class="social" style="color: #666666; font-size:13px;" colspan="3"><br> <!--Footer-->
-         <strong>Contact Us:</strong> <span style="line-height:24px; font-size:12px;" class="rwdbrk">245 King St. E.</span> <span class="hidedash">&mdash;</span> <span style="line-height:24px; font-size:12px;" class="rwdbrk">Stoney Creek, ON L8G 1L9</span> <span class="hidedash">&mdash;</span> <span style="line-height:24px; font-size:12px;" class="rwdbrk">888-WIN-ASIA</span> <span class="hidedash">&mdash;</span> <a name="www_gfa_org__motiv_WB62_G400" href="http://www.gfa.ca/?motiv=WB62-G400" xt="SPCLICK">gfa.ca</a> <br>
-        </td>
-      </tr>
-      <tr>
-        <td align="center" valign="middle" class="social" style="color: #666666; font-size:13px;" colspan="3"><br> <!--Footer-->
-          <strong>Find Us On:</strong><span style="line-height:24px; font-size:12px;">
-          <a name="www_facebook_com_gospelforasia" href="http://www.facebook.com/gfaca" style="text-align: left;" xt="SPCLICK"><img style="display: inline; vertical-align: text-bottom; padding-left:10px;" id="imghide" alt="-->" src="http://www.gfamedia.org/email/digest/facebook-icon-email.png" valign="middle" border="0" spname="http:__www.gfamedia.org_email_digest_facebook-icon-email.png" /></a>&nbsp;<a name="www_facebook_com_gospelforasia" href="http://www.facebook.com/gfaca" style="text-align: left;" xt="SPCLICK">Facebook</a> |
-          <a name="www_twitter_com_gospelforasia" href="http://www.twitter.com/gfaca" xt="SPCLICK"><img valign="middle" style="display: inline; vertical-align: text-bottom; padding-left:10px;" alt="-->" src="http://www.gfamedia.org/email/digest/twitter-icon-email.png" id="imghide" border="0" spname="http:__www.gfamedia.org_email_digest_twitter-icon-email.png" /></a>&nbsp;<a name="www_twitter_com_gospelforasia" href="http://www.twitter.com/gfaca" style="text-align: left;" xt="SPCLICK">Twitter</a> |
-          <a name="www_pinterest_com_gospelforasi" href="http://www.pinterest.com/gfaca/" xt="SPCLICK"><img style="display: inline; vertical-align: text-bottom; padding-left:10px;" valign="middle" class="hide" alt="-->" id="imghide" src="http://www.gfamedia.org/email/digest/pinterest-icon-email.png" border="0" spname="http:__www.gfamedia.org_email_digest_pinterest-icon-email.png" /></a>&nbsp;<a name="www_pinterest_com_gospelforasi" href="http://www.pinterest.com/gfaca/" xt="SPCLICK">Pinterest</a>  |
-          <a name="www_youtube_com_gospelforasia_" href="http://www.youtube.com/gospelforasia/" xt="SPCLICK"><img style="display: inline; vertical-align: text-bottom; padding-left:10px;" valign="middle" class="hide" alt="-->" id="imghide" src="http://www.gfamedia.org/email/digest/youtube-icon-email.png" border="0" spname="http:__www.gfamedia.org_email_digest_youtube-icon-email.png" /></a>&nbsp;<a name="www_youtube_com_gospelforasia_" href="http://www.youtube.com/gospelforasia/" xt="SPCLICK">YouTube</a>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td align="center" colspan="3"><br>Received this email from a friend? <a name="www_gfa_org_subscribe__motiv_W" href="http://www.gfa.ca/subscribe/?motiv=WB62-G400" xt="SPCLICK">Subscribe</a>.</td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center" style="font-size:11px; color:#666666;" class="social"><br><a name="www_gfa_org_unsubscribe__email" href="http://www.gfa.ca/unsubscribe/?email=%%EMAIL%%&spl=WEEKLY&motiv=WB62-G400" style="text-decoration: none;" xt="SPCLICK">Unsubscribe</a> from this email.<br><br><span style="color: #999999; font-size:8px; line-height:11px !important; text-align:centre;">Scripture is taken from the New King James Version. Copyright &copy;1982 by Thomas Nelson, Inc. Used by permission. All rights reserved.</span></td>
-      </tr>
-      <!--End Footer-->
-    </table>
-  </body>
+      
+    
+  
+
+  
+    
+  
+
+  
+    
+    
+  <meta name="title" content="Provide Clean Water and Quench Their Thirst for Jesus"/>
+  <meta name="description" content="Gospel for Asia's clean water ministry is delivering clean, disease-free water to families across South Asia because of people like you.">
+  <link rel="image_src" href="http://gfamedia.org/images/thumbnails/clean-water-fb.jpg" />
+  
+  <meta property="og:image" content="http://gfamedia.org/images/thumbnails/clean-water-fb.jpg">
+  <meta property="og:title" content="Clean Water through Jesus Wells - Bringing Water, Breakthroughs and Redemption">
+  <meta property="og:url" content="http://www.gfa.ca/water/">
+  <meta property="og:description" content="Gospel for Asia's clean water ministry is delivering clean, disease-free water to families across South Asia because of people like you. A Jesus Well provides pure water for an entire village full of thirsty people for only $1400. With clean water, the health of the people improves significantly.">
+ 
+
+    <link href="//www.gfamedia.org/favicon.ico" rel="shortcut icon">
+  
+
+  <title>Clean Water - Gospel for Asia</title>
+
+  
+
+  
+
+  
+
+    <link rel="stylesheet" href="//www.gfamedia.org/u/STATIC/CACHE/css/1f1282e324c2.css" type="text/css" />
+
+    <link type="text/css" rel="stylesheet" href="//www.gfamedia.org/u/STATIC/g/font-awesome/css/font-awesome.css">
+
+    
+  <link rel="stylesheet" href="//www.gfamedia.org/u/STATIC/CACHE/css/178e6781f8eb.css" type="text/css" />
+
+    
+  
+<style>
+  .head-banner {
+		margin-top: -8px;
+	}
+	
+  .p-head-background {
+    background: url(//www.gfamedia.org/images/water/water-header-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: 980px 320px;
+  }
+
+  .ie8 .p-head-background {
+    background: url("");
+    background-size: 980px 300px;
+  }
+
+  .p-head-text-color {
+    color: #fff;
+  }
+
+  .ie8 .p-head-text-color {
+    color: #000;
+  }
+  
+  .p-investment-background {
+    background: #fafbfc url(http://gfamedia.org/images/water/water-investment.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 540px 310px;
+    height: 310px;
+  }
+
+  .p-container-shadow {
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.55);
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.55);
+    box-shadow: 0 0 6px rgba(0,0,0,0.55);
+  }
+
+  .p-quote-padding{
+    padding-top: 70px;
+  }
+
+  .p-well-lady {
+    background: url(//www.gfamedia.org/images/water-dec2.jpg) bottom left no-repeat;
+    background-size: 27%;
+  }
+
+  .p-dec3 {
+    background: url(//www.gfamedia.org/images/water-dec3.jpg) bottom right no-repeat;
+    background-size: 42%;
+  }
+
+  .p-100-adjust {
+    margin-top: 70px;
+    margin-left: 90px;
+  }
+
+  .p-progress-bar {
+    /*background-color: rgb(98,108,118);*/
+    background-color: #314a5d;
+    border: 1px solid;
+    border-radius: 4px;
+    height: 45px;
+    position: relative;
+    opacity: 0.8
+  }
+
+  .p-progress-bar-fill {
+    background-color: rgb(45,186,232);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    height: 100%;
+    text-align: right;
+  }
+
+  .p-progress-bar-fill-label {
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 45px;
+    padding-right: 10px;
+  }
+  
+    .p-water-bg {
+      min-height: 449px; 
+      background-image: url(//www.gfamedia.org/images/homepage/hp-hero-wwd.jpg); 
+      background-repeat: no-repeat; 
+      background-size: 100%;
+    }
+    
+    .p-widget {
+      background: #fff;
+      background: rgba(255, 255, 255, 0.9);
+      margin-top: 106px;
+    }
+
+  @media (max-width: 999px) {
+    .p-progress-bar-fill-label {
+      font-size: 18px;
+    }
+    
+  .p-head-background {
+    background-size: 980px 395px;
+    
+  }
+
+  .ie8 .p-head-background {
+    background-size: 980px 295px;
+  }
+
+  }
+
+  .p-progress-bar-labels {
+    padding: 3px 0;
+  }
+
+  .p-progress-bar-label {
+    color: rgb(98,108,118);
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .p-progress-bar-label-left {
+    float: left;
+  }
+
+  .p-progress-bar-label-right {
+    float: right;
+  }
+
+  @media (max-width: 999px) {
+    .p-100-adjust {
+      margin-top: 60px;
+      margin-left: 40px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 999px) {
+    .p-widget {
+      margin-top: -3px;
+    }
+    
+    .p-water-bg {
+      min-height: 350px; 
+    }    
+  }
+
+  /* mobile */
+  @media (max-width: 767px) {
+    .p-well-lady {
+      background: url('');
+    }
+
+    .p-container-shadow {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+    .p-dec3 {
+      background-size: auto;
+      padding-bottom: 320px;
+    }
+
+    .p-100-adjust {
+      margin-top: 0px;
+      margin-left: 0px;
+    }
+   
+    .p-head-background {
+      background: url('');
+      background-repeat: repeat-x;
+      background-size: 400px 460px;
+      /*padding: 7px;*/
+    }
+
+    .p-head-text-color {
+      color: #000;
+    }
+
+    .p-investment-background {
+      background: #fafbfc url('');
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: 540px 310px;
+      height: 310px;
+    }
+    
+    .p-quote-padding {
+      /*background: #262A2D;*/
+      padding-top: 0px;
+    } 
+    
+    .p-quote-padding p {
+      margin: 0 10px 10px 10px;
+    } 
+    
+    .p-quote-padding img {
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 10px;
+    }
+      
+    .p-water-bg {
+      min-height: 0px; 
+      background: none; 
+    }
+    
+    .p-widget {
+      margin: 10px 0px 15px 0px;
+    }
+  }
+  
+  
+  @media (max-width: 480px) {
+  
+  }
+</style>
+
+
+  
+    
+    
+    <!-- start Mixpanel --><!-- end Mixpanel -->
+  
+</head>
+
+<body class=" site-ca" id="body-main">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NWJF52" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager -->
+
+
+
+
+    
+
+
+<div class="container container-shadow container-main">
+  <div class="row header-site">
+    <a href="#nav-global" class="visible-phone nav-clickdown-toggle unlink">&nbsp;Menu</a>
+    <div class="column column-360 column-push-10">
+      
+        
+        <div class="logo column column-210 hidden-phone">
+          <a href="/"></a>
+        </div>
+        <div class="logo column visible-phone">
+          <a href="/"></a>
+        </div>
+        
+      
+
+      <div class="hidden-phone column column-130 column-push-10 text-12">
+         
+
+<div class="flag-container " data-clickdown>
+  
+    <a href="#flag-dropdown" class="flag-container-link" data-clickdown-link>Canada</a>
+  
+
+  <div id="flag-dropdown" class="flag-container-dropdown" data-clickdown-content>
+    <a href="http://www.gospelforasia.org.au">Australia</a>
+    <a href="http://www.gfa.ca">Canada</a>
+    <a href="http://www.gfa.fi/">Finland</a>
+    <a href="http://www.gfa.org.nz/">New Zealand</a>
+    <a href="http://www.gospelforasia.org.za/">South Africa</a>
+    <a href="http://gfa.or.kr/2007/">South Korea</a>
+    <a href="http://www.gfauk.org">UK</a>
+    <a href="http://www.gfa.org">USA</a>
+    <hr>
+    
+    <a href="http://www.gfa.ca/francais/">French</a>
+    <a href="http://www.gfa.org/spanish/">Spanish</a>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    
+      <div class="column column-590 group hidden-phone text-right links-little">
+        Find us on: <a href="http://www.facebook.com/gfa.ca" title="Facebook"></a>
+        <a href="http://www.twitter.com/gfaca" title="Twitter"></a>&nbsp;<a href="http://blog.gfa.ca/" title="GFA Canada Blog"></a>
+        
+          <span class="column-push-10"></span>
+        
+        <a id="storelink" href="/store/">GFA Store</a><span class="pipe-spaced">|</span>
+        <a href="/contact/">Contact</a><span class="pipe-spaced">|</span>
+        <a class="text-bold" href="/myaccount/">My Account</a>
+        
+  
+
+&nbsp;
+
+        <form id="searchbox_014392346737734542191:xwjts7nr_ke" action="/search/" method="GET" style="display: inline; padding-left: 5px;">
+          <input type="hidden" value="014392346737734542191:xwjts7nr_ke" name="cx">
+          <input type="hidden" value="FORID:11" name="cof">
+          <input type="text" value="" maxlength="100" name="q" class="input-darkborder column-100">&nbsp;
+          <button type="submit" name="search" class="button button-text">Search</button>
+        </form>
+      </div>
+    
+  </div>
+
+  
+    
+
+<div class="row header-nav" id="nav-global">
+  <div class="nav-clickdown row" style="margin-top: 15px;">
+    <div class="nav-clickdown-mobile">
+      <p class="text-center visible-phone">
+        <span class="links-little"><a href="/store/">GFA Store</a> | <a href="/contact/">Contact</a> | <a class="text-bold" href="/myaccount/">My Account</a>
+  
+
+&nbsp;</span>
+      </p>
+    </div>
+
+    <div class="nav-clickdown-section column-80 column-push-30" id="nav-about" data-clickdown>
+      <a class="nav-clickdown-sectionlink" href="#nav-about" data-clickdown-link>About</a>
+      <div class="nav-clickdown-linkblock column-350" data-clickdown-content>
+        <div class="nav-clickdown-arrow column-push-20"></div>
+        <div class="column column-150">
+          <p class="nav-clickdown-subheader">About Gospel for Asia</p>
+          <ul class="nav-clickdown-linklist">
+            <li><a href="/about/who-we-are">Who We Are</a></li>
+            <li><a href="/about/what-we-do">What We Do</a></li>
+            <li><a href="/about/kpyohannan/">Founder - About K.P. Yohannan</a></li>
+            <li><a href="/about/financial-integrity/">Financial Integrity</a></li>
+            <li><a href="/about/faqs/">FAQs</a></li>
+            <li><a href="/about/what-we-believe/">What We Believe</a></li>
+            <li><a href="/regions/">Where We Work</a></li>
+            <li><a href="/believerschurch/">Field Partners</a></li>
+          </ul>
+        </div>
+        <div class="column column-140 column-push-20">
+          <p class="nav-clickdown-subheader">Major Ministry Areas</p>
+          <ul class="nav-clickdown-linklist awell bg-white" style="padding: 6px 3px 6px 6px;">
+            <li><a href="/sponsor/why-national-missionaries/">National Missionaries</a></li>
+            <li><a href="/sponsorachild/the-dalits/">GFA's Bridge of Hope</a></li>
+            <li><a href="/water/">Clean Water</a></li>
+            <li><a href="/ministries/widows-abandoned-children/">Widows/Abandoned Children</a></li>
+            <li><a href="/bibles">Bibles/Gospel Lit.</a></li>
+            <li><a href="/ministries/churches/">Church Buildings</a></li>
+            <li><a href="/ministries/jesuswells/">Jesus Wells</a></li>
+            <li><a href="/compassion/">Compassion Services</a></li>
+            <li><a href="/radio/">Radio in Asia</a></li>
+            <li><a href="/ministries/biblecolleges/">Bible Colleges</a></li>
+            <li><a href="/flood/">Flood Relief</a></li>
+            <li><a href="/children/">Children's Ministries</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="nav-clickdown-section column-130" id="nav-media" data-clickdown>
+      <a class="nav-clickdown-sectionlink" href="#nav-media" data-clickdown-link>Media/News</a>
+      <div class="nav-clickdown-linkblock column-340" data-clickdown-content>
+        <div class="nav-clickdown-arrow column-push-40"></div>
+        <div class="column column-140">
+          <p class="nav-clickdown-subheader">News</p>
+          <ul class="nav-clickdown-linklist">
+            <li><a class="text-semibold" href="/flood/myanmar-india/">FLOOD RELIEF</a></li>
+            <li><a href="/news/articles/features/">Feature Stories</a></li>
+            <li><a href="http://www.gospelforasia-reports.org">Reports from the Field</a></li>
+            <li><a href="/news/articles/archive/">Feature/News Archives</a></li>
+            <li><a href="/persecution">Persecution Reports</a></li>
+          </ul>
+        </div>
+        <div class="column column-140 column-push-20">
+          <p class="nav-clickdown-subheader">Media</p>
+          <ul class="nav-clickdown-linklist">
+            <li><a href="/dailyphoto/"><i class="icon-grey icon-grey-camera"></i>Photo of the Day</a></li>
+            <li><a href="/photo/"><i class="icon-grey icon-grey-photo"></i>Photo Stories</a></li>
+            <li><a href="/videos"><i class="icon-grey icon-grey-playbutton"></i>Videos</a></li>
+            <li><a href="/gfa-world/"><i class="icon-grey icon-grey-book"></i>GFA World</a></li>
+            <li><a href="http://harvestnewsletter.ca"><i class="icon-grey icon-grey-book"></i>Harvest Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="nav-clickdown-section column-140" id="nav-getinvolved" data-clickdown>
+      <a class="nav-clickdown-sectionlink" href="#nav-getinvolved" data-clickdown-link>Get Involved</a>
+      <div class="nav-clickdown-linkblock column-380" data-clickdown-content>
+        <div class="append-top-half text-center">
+          <a class="nav-clickdown-link" href="/email_subscriptions/signup/"><i class="icon-grey icon-grey-envelope"></i>Sign up to receive our weekly email digest</a><br />
+        </div>    
+        <div class="nav-clickdown-arrow column-push-40"></div>
+        <div class="group">
+          <div class="column column-190">
+            <p class="nav-clickdown-subheader">One Life. Make it Count.</p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="/schoolofdiscipleship" class="append-bottom-half">GFA School of Discipleship</a></li>
+              <li><a href="/teamgfa/">Team GFA (volunteer)</a></li>
+              <li><a href="/teamgfa/" style="padding-left: 5px;">- find out more</a></li>
+              <li><a href="/teamgfa/start/" style="padding-left: 5px;">- social media</a></li>
+              <li><a href="/teamgfa/share-the-books/" style="padding-left: 5px;">- share our books</a></li>
+              <li><a href="/joinstaff/" class="append-top-half append-bottom-half">Join Staff</a></li>
+              <li><a href="/college/" class="append-top-half append-bottom-half">Internship</a></li>
+              <li><a href="/pedal" class="append-top-half append-bottom-half">Push the Pedal</a></li>
+              <li><a href="/spark/">THE SPARK INITIATIVE<br>Be the spark in your church.</a></li>
+              
+            </ul>
+          </div>
+          <div class="column column-130 column-push-20">
+            <p class="nav-clickdown-subheader">Your Church and GFA</p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="/church">Encourage your congregation, invite a church speaker</a></li>
+            </ul>
+            <p class="nav-clickdown-subheader append-top-half">MyGFA</p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="http://www.mygfa.org">Raise funds for Jesus Wells, Water Buffalo and more.</a></li>
+            </ul>
+            <p class="nav-clickdown-subheader append-top-half">Blog for Asia</p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="http://www.blogforasia.org">Use your voice for the voiceless</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="bottom"><a href="/place/"></a></p>
+      </div>
+    </div>
+    
+    <div class="nav-clickdown-section column-80" id="nav-pray" data-clickdown>
+      <a class="nav-clickdown-sectionlink" href="#nav-pray" data-clickdown-link>Pray</a>
+      <div class="nav-clickdown-linkblock column-410" data-clickdown-content>
+      
+      
+        <div class="nav-clickdown-arrow column-push-20"></div>
+        <div class="group">
+          <div class="column column-170">
+            <p class="nav-clickdown-subheader">Pray Without Ceasing</p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="/pray">Prayer is Our Foundation</a></li>
+              <li><a href="/pray/monthly/">Monthly Focus</a></li>
+              <li><a href="/pray/people-ministries/">Areas of Ministry to Pray For</a></li>
+            </ul>
+          </div>
+          <div class="column column-170 column-push-30">
+            <p class="nav-clickdown-subheader">Participate</p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="/prayer">Streaming Prayer Meeting</a></li>
+              <li><a href="/pray/pray-with-us/">Join our Prayer Team Sign up for Prayer Updates</a></li>
+            </ul>
+          </div>
+          <!-- IDOP -->
+          <a class="column-340 append-top" href="/international-day-of-prayer-for-the-persecuted-church/"></a>
+          <!-- End IDOP -->
+        </div>
+  
+      </div>
+    </div>
+    
+    <div class="nav-clickdown-section column-140" id="nav-sponsorship" data-clickdown>
+      <a class="nav-clickdown-sectionlink text-bold" href="#nav-sponsorship" data-clickdown-link>Sponsorship</a>
+      <div class="nav-clickdown-linkblock column-220" data-clickdown-content>
+        <div class="nav-clickdown-arrow column-push-50"></div>
+        <div class="column column-220">
+          <ul class="nav-clickdown-linklist">
+            <li><a href="/sponsor/search/">Sponsor a Missionary</a></li>
+            <li><a href="/sponsorachild/filter/">Sponsor a Child</a></li>
+            <li><a href="/women/sponsor/">Sponsor a Woman Missionary</a></li>
+            <li class="append-top-half"><a href="/sponsorship/">Learn About Sponsorship</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    
+    <div class="nav-clickdown-section column-200" id="nav-donate" data-clickdown>
+      <a class="nav-clickdown-sectionlink" href="#nav-donate" data-clickdown-link>Donate/Ways to Give</a>
+      <div class="nav-clickdown-linkblock column-380 column-pull-70" data-clickdown-content>
+        <div class="nav-clickdown-arrow column-push-110"></div>
+
+        <div class="append-top-half append-bottom hidden-phone text-center"><a class="btn-app btn-app-green btn-app-outline" href="/donation/">Donate Now <i class="fa fa-chevron-circle-right"></i></a></div>
+        <div class="append-top-half append-bottom visible-phone text-center"><a class="btn-app btn-app-green btn-app-outline" href="/donation/">Donate Now <i class="fa fa-chevron-circle-right"></i></a></div>
+        
+        <div class="awell bg-white append-bottom-half">
+          <div class="column-push-60 column-270">
+            <p class="bottom"><b><a class="" href="/donation/">Visit our Donation Centre</a></b></p>
+            <p class="append-top-half bottom"><b>Popular Items:</b></p>
+            <ul class="nav-clickdown-linklist">
+              <li><a href="/donation/items/jesus-wells/">Jesus Wells</a></li>
+              <li><a href="/donation/items/widows-abandoned-children/">Widows and Abandoned Children</a></li>
+              <li><a href="/donation/items/where-most-needed/">Where Most Needed</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="visible-phone">
+          <p class="nav-clickdown-subheader append-top">
+              Christmas <font color='red'>Catalogue</font>
+            </p>
+            <a style="display:inline-block;color:#1242B0;font-weight:600;height:30px;" href="/gift/">
+            Catalogue</font>/gc-thumbnail.jpg" style="float: left; padding-right: 10px;">Gifts that help rescue families from poverty & bring Christ’s love
+            </a>
+          
+          <p class="nav-clickdown-subheader append-top">
+              Veil of Tears
+            </p>
+            <a style="display:inline-block;color:#DDA01D;font-weight:600;height:30px;" href="/veiloftears/?motiv=WB62-ZGVT2">
+            Have you seen the Veil of Tears movie and want to help? See giving options
+            </a>
+          </div>
+        
+        <div class="column column-160">
+        
+          <p class="nav-clickdown-subheader">Giving Bundles</p>
+          <ul class="nav-clickdown-linklist">
+              <li><a href="/bundles/equipping-missionaries/">Equipping Missionaries</a></li>
+              <li><a href="/bundles/gifts-of-compassion/">Gifts of Compassion</a></li>
+              <li><a href="/bundles/greatest-need/">Greatest Need</a></li>
+          </ul>
+          
+          <p class="nav-clickdown-subheader append-top">Non-Cash Giving</p>
+          <ul class="nav-clickdown-linklist">
+            
+              <li><a href="/noncashgiving/annuities/">Annuities</a></li>
+              <li><a href="/noncashgiving/securities/">Securities</a></li>
+            
+          </ul>
+
+          
+        </div>
+
+        <div class="column column-160 column-push-20">
+
+          <div class="hidden-phone">
+            <p class="nav-clickdown-subheader">
+              Christmas <font color='red'>Catalogue</font>ue
+            </p>
+            <a style="display:inline-block;width:130px;color:#1242B0;font-weight:600;height:30px;" href="/gift/">Catalogue</font>/gc-thumbnail.jpg">Gifts to bring Christ's Love</a>
+          </div>
+          
+         
+
+          <div class="hidden-phone">
+            <p class="nav-clickdown-subheader append-top">
+              Veil of Tears
+            </p>
+            <a style="display:inline-block;width:130px;color:#DDA01D;font-weight:600;height:30px" href="/veiloftears/?motiv=WB62-ZGVT2">See giving options</a>
+          </div>
+
+            
+
+          
+        </div>
+      </div>
+    </div>
+    <div class="nav-clickdown-section column-130" id="nav-resources" data-clickdown>
+      <a class="nav-clickdown-sectionlink" href="#nav-resources" data-clickdown-link>Free Resources</a>
+      <div class="nav-clickdown-linkblock column-230 column-pull-80" data-clickdown-content>
+        <div class="nav-clickdown-arrow column-push-120"></div>
+        <p class="nav-clickdown-subheader">Free Downloads (Digital)</p>
+        <div>
+          <ul class="nav-clickdown-linklist">
+           <li><a href="/resource">Featured Free Resources</a>
+           <li><a href="/resource/books">Ebook Downloads</a></li>
+            <li><a href="/resource/audio">Audio - MP3s</a></li>
+            <li><a href="/resource/video">Video Downloads</a></li>
+            <li><a href="/resource/photos">Photos</a></li>
+          </ul>
+          <p class="nav-clickdown-subheader append-top">Free Books (Print)</p>
+          <ul class="nav-clickdown-linklist">
+            <li><a href="/freebook/?motiv=WB60-NVB1">Revolution in World Missions</a></li>
+            <li><a href="/book/?motiv=WB60-NVB9">No Longer A Slumdog</a></li>
+          </ul>
+        </div>
+        <p class="nav-clickdown-subheader append-top bottom">Digital Only Version</p>
+        <a href="/e-revolution/?motiv=WB60-NV1E"></a>
+      </div>
+    </div>
+    <div class="nav-clickdown-section column-130 visible-phone" id="nav-search" data-clickdown>
+      <div class="nav-clickdown-sectionlink unlink">
+        <form id="searchbox_014392346737734542191:xwjts7nr_ke" class="nav-search-form" action="/search/" method="GET" style="display: inline;">
+          <input type='hidden' name='csrfmiddlewaretoken' value='10WhpZZso2yfnAJt8ptxkWrZS5f0r6Rq' />
+          <input type="hidden" value="014392346737734542191:xwjts7nr_ke" name="cx">
+          <input type="hidden" value="FORID:11" name="cof">
+          <input type="search" value="" class="form-textbox" maxlength="100" name="q" placeholder="Search..."><button type="submit" name="search" class="form-button text-14"><span></span></button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="nav-clickdown-section column-130 visible-phone" id="nav-social" data-clickdown>
+      <div class="nav-clickdown-sectionlink bottom unlink">
+        <p class="text-center append-bottom-half">Find us on: </p>
+        <p class="text-center"><a href="http://www.facebook.com/gfa.ca"></a>
+        <a href="http://www.twitter.com/gfaca"></a>
+        <a href="http://plus.google.com/+GFACanada"></a>
+        <a href="http://blog.gfa.ca/"></a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="nav-clickdown-shadowstrip append-top"></div>
+  
+
+  
+
+  <div class="row content-main ">
+    
+	<div class="row" style="margin-bottom:-20px;">
+		
+	</div>
+	
+<div class="wrapper tk-myriad-pro text-18">  
+	<div class="row pad-both append-top-half p-water-bg" id="intro">
+    
+      <div class="column column-500"></div>
+      <div class="column column-300 column-push-110 awell awell-light p-widget">  
+        <h1 class="heading bottom h2">Donate to Jesus Wells</h1>
+        <p class="text-center bottom"><a class="text-12 unlink" data-modal-link href="#modal-fund"><u>How will the funds be used?</u></a></p>
+        <div class="hidden" id="modal-fund">
+          <div class="column-600 awell awell-light">
+            <h2 class="heading h2 bottom">Jesus Wells</h2>
+            <p>A Jesus Well costs $1,400, these funds provide for equipment, digging and installation. The wells are often located near GFA churches or Bible colleges, the well provides for both the physical need of clean water and spiritual needs. Wells can provide hundreds of opportunities for missionaries to share the love of Jesus with the villagers who come for clean water. A Jesus Well provides pure water for an entire village full of thirsty people for only $1,400. With clean water, the health of the people improves significantly.</p>
+          </div>
+         </div>
+
+        <div class="column column-180 column-push-20">
+          <form action="/donation/cart/?next=/donation/checkout/" method="POST" class="append-top-half pad-bottom-half">
+            <input type='hidden' name='csrfmiddlewaretoken' value='10WhpZZso2yfnAJt8ptxkWrZS5f0r6Rq' />
+            <input type="hidden" name="donation.replace" value="2710">
+            <div class="btn-group btn-group-radio append-bottom-half column-push-30" data-toggle="buttons-radio">
+              <div class="btn btn-radio column-150 text-16">
+                <input type="hidden" value="700" name="donation.replace.amount">
+                <span></span>$700
+              </div>
+              <div class="btn btn-radio column-150 active text-16">
+                <input type="hidden" value="1400" name="donation.replace.amount">
+                <span></span>$1,400
+              </div>
+              <div class="btn btn-radio column-150 text-16">
+                <input type="hidden" value="4200" name="donation.replace.amount">
+                <span></span>$4,200
+              </div>
+              <div class="btn btn-radio column-170 text-16">
+                <span></span>$
+                <input class="input-rounded column-80" name="donation.replace.amount" type="text" placeholder="Other">
+              </div>
+            </div>
+            <button type="submit" class="abtn abtn-green text-14 column-push-30">Donate to Wells <span class="abtn-symbol visible-desktop">►</span></button>
+          </form>
+        </div>
+
+    </div>
+  </div>
+
+<div class="row">
+
+  <div class="row">
+
+    <div class="column-820 container append-top-half hidden-phone">
+      <div class="float-right column-90">
+        <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+  <a class="addthis_button_facebook"></a>
+  <a class="addthis_button_twitter"></a>
+  <a class="addthis_button_compact text-12"></a>
+</div>
+
+
+<!-- AddThis Button END -->
+
+      </div>
+    </div> 
+    
+
+    <div class="column column-600 column-push-40">
+
+      <h1 class="heading bottom text-36 text-bold">Clean Water through Jesus Wells</h1>
+      <h2 class="heading h2">Bringing Water, Breakthroughs and Redemption</h2>
+
+      <div class="column-820 container append-top-half visible-phone">
+        <div class="float-right column-90">
+          <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+  <a class="addthis_button_facebook"></a>
+  <a class="addthis_button_twitter"></a>
+  <a class="addthis_button_compact text-12"></a>
+</div>
+
+
+<!-- AddThis Button END -->
+
+        </div>
+      </div> 
+
+      <div class="append-top">
+        <p>Gospel for Asia’s clean water ministry is delivering clean, disease-free water to families across South Asia because of people like you.</p>
+        <p>In South Asia, finding water that will not cause death in the family is a difficult challenge many face.</p>
+        <p>Women and children are forced to walk hours a day to find water sources such as filthy ponds or lakes, which are oftentimes contaminated with waterborne illnesses. Sometimes they know this will bring death and sickness to their families, but they have no other option.</p>
+      </div>      
+ 
+      
+      <h2 class="heading text-184x append-top2">People Are Thirsty</h2>
+      <div class="">
+        <p>"Almost all rivers are dry right now," shared one Gospel for Asia worker, Daniel. But the water shortage in his village of Andhra Pradesh, India, was just beginning. "The real drought will come in the summer days...We have to wait almost six and a half months for the rain to come."</p>
+        <p>Not far away, Gospel for Asia Pastor Layak spoke of the water shortage his people faced." In the summer especially, the people here would bring water from the other villages," he says. "The nearest village is at least four miles away."</p>
+        <p>The Lord has used Jesus Wells profoundly. The water is freely offered to all, regardless of their religious background. But His love, demonstrated so clearly through the Jesus Well, makes such an impression on the people's hearts that many choose to follow Him.</p>
+      </div>
+    </div>
+    <div class="column column-230 append-top2 hidden-phone">
+      <div class="column column-60">
+        
+      </div>
+      <div class="column column-160 column-push-10">
+        <p class="text-12">
+          <strong>100%</strong> of donations preferenced for use on the field is sent to the field.
+        </p>
+      </div>
+    </div>
+   
+  </div>
+
+
+</div>
+
+  <div class="row append-top p-investment-background p-container-shadow hidden-phone">
+    <div class="column column-580 column-push-40">
+      <h2 class="heading text-184x append-top2">A Wise Investment</h2>
+      
+      <p>Although other water well projects can cost several times as much, Gospel for Asia is able to drill a well for only $1,400*.</p>
+      <p>When drilling a well, GFA hires a local contractor. Because that same contractor will be hired to drill a large number of wells, he will give a lower price per well. Additionally, most contractors in South Asia use simple equipment to drill and install wells, so their costs are low from the start.</p>
+      <p class="tk-myriad-pro text-14 hidden">*This price reflects a recent increase in the cost of <font color='red'>labour </font>and supplies in South Asia. We continue to seek affordable pricing while treating local workers with fairness and integrity. Each dollar given toward Jesus Wells still makes a significant impact.</p>
+      
+    </div>
+  </div>
+  
+  <div class="row append-top visible-phone">
+    <h2 class="heading text-184x append-top2">A Wise Investment</h2>
+      <p>Although other water well projects can cost several times as much, Gospel for Asia is able to drill a well for only $1,400*.</p>
+      <p>When drilling a well, GFA hires a local contractor. Because that same contractor will be hired to drill a large number of wells, he will give a lower price per well. Additionally, most contractors in South Asia use simple equipment to drill and install wells, so their costs are low from the start.</p>
+  </div>
+  
+  <div class="row append-top2">
+    <div class="column column-380 append-top2">
+      
+    </div>
+    <div class="column column-500 column-push-40 append-top2">
+    <h2 class="heading h2 text-semibold append-top">Millions in Asia are without clean water</h2>
+      <ul class="list-dot column-push-30 text-16 list-padding">
+        <li><strong>3.4 million people die each year from water-related diseases.</strong><br>That’s almost the entire city of Montreal, QC.</li>
+        <li>Diarrhea is the second leading cause of death among children under five in the world. Around 1.5 million deaths a year, nearly one in five, are caused by diarrhea, which kills more children than malaria, AIDS, and measles combined.</li>
+        <li>Globally, <strong>women spend 200 million hours a day collecting water.</strong> This is equivalent to building 28 Empire State Buildings each day.</li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <div id="well"></div>
+  <div class="row append-top3 p-well-lady">
+    <div class="column-670 column-push-180">
+    <h2 class="heading text-24">A Jesus Well provides pure water for <strong>an entire village full of thirsty people</strong> for only $1,400. With clean water, the health of the people improves significantly.</h2>
+      <p>Since a Jesus Well is drilled deep into the ground, it is less likely to dry up during the hot summers in Asia. Through the provision of clean water, villagers are open to hearing about the God who loves them and provides for their needs.</p>
+      
+      <div class="hidden-phone">
+        <a class="brightcove" href="http://video.gfa.org/services/player/bcpid587258091001?bctid=1251199698001&bgcolor=#000000&autoStart=true&width=500&height=281">    
+        </a>   
+      </div>
+      
+      <div class="column-480 column-push-50 visible-phone">
+        <div class="brightcove-responsive-wrapper brightcove-ratio-widescreen">
+  
+    
+  
+
+  <object class="BrightcoveExperience">
+    <param name="bgcolor" value="#000000">
+    <param name="width" value="100%">
+    <param name="height" value="100%">
+    <param name="playerKey" value="AQ~~,AAAAiDe-MuE~,js0VR9thEl3WDSqhZYGd2I6q2_JmD4EG">
+    <param name="isVid" value="true">
+    <param name="isUI" value="true">
+    <param name="dynamicStreaming" value="true">
+    <param name="wmode" value="opaque">
+    <param name="videoSmoothing" value="false">
+    <param name="htmlFallback" value="true">
+    
+      <param name="autoStart" value="false">
+    
+    <param name="@videoPlayer" value="1251199698001">
+    
+    
+      <param name="linkBaseURL" value="http://www.gfa.ca/water/">
+    
+    
+    
+  </object>
+  
+</div>
+
+      </div> 
+    </div>
+    
+    <div class="column-750 column-push-180">  
+      <div class="row column-push-150">
+      <h1 class="heading heading-h1 bottom append-top">Donate to Jesus Wells</h1>
+        <div class="column column-200">
+          <form action="/donation/cart/" method="POST" class="append-top-half pad-bottom2">
+            <input type='hidden' name='csrfmiddlewaretoken' value='10WhpZZso2yfnAJt8ptxkWrZS5f0r6Rq' />
+            <input type="hidden" name="donation.replace" value="2710">
+            <div class="btn-group btn-group-radio append-bottom" data-toggle="buttons-radio">
+              <div class="btn btn-radio column-150">
+                <input type="hidden" value="700" name="donation.replace.amount">
+                <span></span>$700
+              </div>
+              <div class="btn btn-radio column-150 active">
+                <input type="hidden" value="1400" name="donation.replace.amount">
+                <span></span>$1,400
+              </div>
+              <div class="btn btn-radio column-150">
+                <input type="hidden" value="4200" name="donation.replace.amount">
+                <span></span>$4,200
+              </div>
+              <div class="btn btn-radio column-170">
+                <span></span>$
+                <input class="input-rounded column-80" name="donation.replace.amount" type="text" placeholder="Other">
+              </div>
+            </div>
+            <button type="submit" class="abtn abtn-green text-14">Donate to Wells <span class="abtn-symbol">►</span></button>
+          </form>
+        </div>
+
+        <div class="column column-300 p-100-adjust">
+          <div class="column column-90">
+            
+          </div>
+          <div class="column column-180 column-push-10">
+            <p class="text-12" style="margin-top: 10px;">
+              <strong>100%</strong> of donations preferenced for use on the field is sent to the field.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+     <div class="column-400 column-push-320 append-top">
+     <a href="https://www.mygfa.org/p/choose/jesuswells/" target="_blank"></a>
+     <p class="text-14">Another way to give is through a <a href="https://www.mygfa.org/p/choose/jesuswells/" target="_blank">MyGFA campaign</a>.   This is a great way that you can raise funds for Jesus Wells!  It gives you an opportunity to tell your friends about how God's love is being shared through the provision of clean water.</p>
+     </div>
+  
+  
+  
+
+  <div class="row append-top append-bottom2 p-dec3">
+    <div class="column-430 column-push-180">
+      <h2 class="heading h2">BioSand water filters are perfect solutions for <strong>families or a small community</strong>.  Your gift of $30 will provide water that is 98 percent pure.</h2> 
+      <p>With clean water available to them, families will live healthier lives and are more open to hearing about the love of Christ from the local Gospel for Asia-supported church that will install and maintain the filter.</p>
+      <a class="abtn abtn-blue float-right" href="/water/biosand/">Learn More <span class="abtn-symbol">►</span></a>
+    </div>
+  </div>
+
+  <div class="row column-350" style="margin: 0 auto;">
+    <div class="addthis_toolbox addthis_default_style">
+    <p><span style="position: relative; top: -4px; float: left; margin-right: 10px;" class="text-18">Share this with your friends: </span>
+      <a class="addthis_button_twitter" title="Tweet This"></a>
+      <a class="addthis_button_facebook" title="Share to Facebook"></a>
+    </p>
+    </div>
+  </div>
+
+  <div class="row append-top2 append-bottom2 text-14 ">
+    <div class="column-630 column-push-180">
+      <p>*This price reflects a recent increase in the cost of <font color='red'>labour </font>and supplies in South Asia. We continue to seek affordable pricing while treating local workers with fairness and integrity. Each dollar given toward Jesus Wells still makes a significant impact.</p>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+  <div class="row content-main">
+    
+  </div>
+</div>
+
+<div class="container">
+  
+          
+    <div class="row">
+      
+        <ul class="nav-horizontalbars text-12 append-top">
+          <li class="first"><a href="/about/financial-integrity/">Financial Integrity</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/about/faqs/">FAQ</a></li>
+          <li><a href="/help/">Help</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/resource/">Free Resources</a></li>
+          <li><a href="/email_subscriptions/signup/">Get Email Updates</a></li>
+          <li><a href="/francais/">Français</a></li>
+        </ul>
+        
+        <ul class="nav-horizontalbars text-12 append-top top-align">
+          <li class="first"><a href="/videos/"><b>Media:</b> Watch Gospel for Asia Videos</a></li>
+          <li><a href="http://www.veiloftearsmovie.com" target="_blank"><b>Documentary:</b> Veil of Tears</a></li>
+          <li class="media-footer-wide"><a href="/women/"><b>Hope for Women:</b> Restore Her Dignity</a></li>
+        </ul>
+      
+        <div class="nav-horizontalbars text-12 text-center append-top">
+          <a href="http://www.mygfa.org/"></a>
+          <p class="bottom"><a href="http://www.mygfa.org/">myGFA is Your GFA</a></p>
+          <p class="bottom"><a href="http://www.mygfa.org/">Start your own online campaign and help fulfill the Great Commission.</a></p>
+        </div>
+        
+      
+    </div>
+    <div class="text-centered text-12 append-bottom append-top2">
+      
+        <p>&copy; Gospel for Asia - "Transforming Communities through Christ's Love" - <span class="copyright-phone">888‑WIN‑ASIA (888‑946‑2742)</span><br><br>
+          
+        </p>
+      
+    </div>
+  
+</div>
+<div class="hidden-phone" style="z-index: 1000; min-height: 100%; display: none;" id="nav-cover"></div>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Omniture -->
+
+
+<!-- End SiteCatalyst code version: H.24.2. -->
+
+
+
+  
+
+
+
+
+
+
+<!-- Facebook Pixel Code -->
+
+<noscript></noscript>
+<!-- End Facebook Pixel Code -->
+
+
+
+  
+
+
+
+  
+
+
+
+    <!-- SeeWhy -->
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
 </html>
-
-

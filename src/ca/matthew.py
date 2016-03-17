@@ -21,7 +21,6 @@ class Matthew(object):
         self.raw = raw
         self.input_type = input_type
         self.debug = verbose
-        print(verbose)
 
     def set_content(self, content):
         self.content = content

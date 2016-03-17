@@ -54,7 +54,7 @@ class Job(object):
         return matthew
 
     def process_article(self, content):
-        content = content[content.find('<div class="article-content">'):]
+        #content = content[content.find('<div class="article-content">'):]
         matthew = Matthew(content, self.get_raw(content), "article", verbose=self.debug)
         matthew.remove_js()
         matthew.set_raw(self.get_raw(matthew.get_content()))
@@ -65,6 +65,10 @@ class Job(object):
         matthew.fix_spelling()
         matthew.fix_css()
         matthew.remove_images()
+        return matthew
+
+    def run_results(self, content):
+        matthew = Matthew(self.read_file(content), self.get_raw(content), verbose=self.debug)
         return matthew
 
     def html_result(self, matthew):
