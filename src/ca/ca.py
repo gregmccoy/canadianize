@@ -30,7 +30,7 @@ def read_file(infile, outfile, url, article, verbose, result):
             obj = job.html_email(infile)
             print_outfile(outfile, obj)
 
-            obj = job.run_results(infile)
+            obj = job.run_results(outfile)
             print_results(obj, job)
 
     #webbrowser.open('file://' + os.path.realpath("data/result.html"), new=2)
