@@ -48,7 +48,7 @@ class Job(object):
             print("+ Test Raw for replaced content Result = " + str(matthew.get_raw().find("center")))
         matthew.preheader()
         matthew.times()
-        matthew.replace_source_codes()
+        #matthew.replace_source_codes()
         matthew.fix_spelling()
         matthew.fix_css()
         return matthew
