@@ -16,3 +16,4 @@ optional arguments:
 Install file probably doesn't work yet
 
 
+Matthew run `python ca.py -f new.html`
