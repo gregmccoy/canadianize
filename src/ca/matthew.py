@@ -106,45 +106,77 @@ class Matthew(object):
         return 0
 
 
-    def change(self):
-        for row in self.replaces:
-            if self.raw.find(row[0]) != -1:
-                print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
-                if self.debug:
-                    print('+ Input Type = ' + str(self.input_type))
-                if self.input_type == "article":
-                    self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
-                else:
-                    self.content = self.content.replace(row[0], row[1])
-                self.raw = self.raw.replace(row[0], row[1])
-                if self.debug:
-                    print("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0])))
-                    print("+ Search Content for replaced content Result = " + str(self.content.find(row[0])))
-                    print("\n")
-        return 0
+    def safe_replace(self, old, new):
+        index = self.content.find(old)
+        while index != -1:
+            ignores = ["'", '"', "-", "#", "/", ":", ""]
+            beginchar = self.content[index - 1]
+            endchar = self.content[index + len(old)]
+            first = self.content[index]
+            if beginchar == " " or endchar == " ":
+                if beginchar not in ignores and endchar not in ignores:
+                    try:
+                        sindex = index - 5
+                        if sindex < 0:
+                            sindex = 0
+                        eindex = index + len(old) + 5
+                        if eindex > len(self.content):
+                            eindex = len(self.content)
+                        startfive = self.content[sindex:index]
+                        endfive = self.content[index + len(old):eindex]
 
+                        repstr = self.content[sindex:eindex]
+
+                        print(('* Replacing "' + old + '" with "' + new + '" *'))
+                        self.content = self.content.replace(repstr, startfive + str(new) + endfive, 1)
+                    except:
+                        print("Breaking")
+                        break
+            index = self.content.find(old, index + len(old))
+
+
+    def change(self):
+	for row in self.replaces:
+	    if self.raw.find(row[0].lower()) != -1:
+		if self.debug:
+		    print(('+ Input Type = ' + str(self.input_type)))
+		if self.input_type == "article":
+		    print(('* Replacing "' + row[0] + '" with "' + row[1] + '" *'))
+		    self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
+		else:
+                    self.safe_replace(row[0], row[1])
+		self.raw = self.raw.replace(row[0], row[1])
+		if self.debug:
+		    print(("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0]))))
+		    print(("+ Search Content for replaced content Result = " + str(self.content.find(row[0]))))
+		    print("\n")
+	return 0
 
     def fix_spelling(self):
         dictCA = enchant.DictWithPWL("en_CA", "data/words")
         dictUS = enchant.DictWithPWL("en_US", "data/words")
         wordlist = re.sub("[^\w]", " ",  self.raw).split()
+        done = []
         for word in wordlist:
-            if not word.isdigit():
+            word = word.replace("_", "")
+            if not word.isdigit() and len(word) > 0:
                 if not dictCA.check(word) and dictUS.check(word):
-                    new = dictCA.suggest(word)
-                    print("Non-Canadian Word - *" + word + "* Replace with? ")
-                    for counter, option in enumerate(new):
-                        print(str(counter) + " - " + option)
-                        if counter > 10:
-                            break;
-                    print("Don't replace - q")
-                    choice = raw_input("Select Replacment\n")
-                    if choice != "q":
-                        if self.input_type == "article":
-                            new_word = str(new[int(choice)]).decode('utf-8')
-                            self.content = self.content.replace(str(word), "<font color='red'>" + str(new_word) + "</font>")
-                        else:
-                            self.content = self.content.replace(word, new[int(choice)])
+                    if not word in done:
+                        new = dictCA.suggest(word)
+                        print("Non-Canadian Word - *" + word + "* Replace with? ")
+                        for counter, option in enumerate(new):
+                            print(str(counter) + " - " + option)
+                            if counter > 10:
+                                break;
+                        print("Don't replace - q")
+                        choice = raw_input("Select Replacment\n")
+                        if choice != "q":
+                            if self.input_type == "article":
+                                new_word = str(new[int(choice)]).decode('utf-8')
+                                self.content = self.content.replace(str(word), "<font color='red'>" + str(new_word) + "</font>")
+                            else:
+                                self.safe_replace(word, new[int(choice)])
+                                done.append(word)
         return 0
 
     def get_links(self):
