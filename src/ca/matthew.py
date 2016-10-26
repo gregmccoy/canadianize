@@ -109,11 +109,11 @@ class Matthew(object):
     def safe_replace(self, old, new):
         index = self.content.find(old)
         while index != -1:
-            ignores = ["'", '"', "-", "#", "/", ":", ""]
+            ignores = ["'", '"', "-", "#", "/", ":", "u"]
             beginchar = self.content[index - 1]
             endchar = self.content[index + len(old)]
             first = self.content[index]
-            if beginchar == " " or endchar == " ":
+            if beginchar == " " or endchar == " " or beginchar == ">" or endchar == "<":
                 if beginchar not in ignores and endchar not in ignores:
                     try:
                         sindex = index - 5
@@ -137,7 +137,7 @@ class Matthew(object):
 
     def change(self):
 	for row in self.replaces:
-	    if self.raw.find(row[0].lower()) != -1:
+	    if self.raw.find(row[0]) != -1:
 		if self.debug:
 		    print(('+ Input Type = ' + str(self.input_type)))
 		if self.input_type == "article":
