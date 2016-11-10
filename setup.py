@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
         name = 'Canadianize',
@@ -8,8 +8,8 @@ setup(
         version = '0.3.1',
         license='MIT',
         long_description=open('README.md').read(),
-        requires = [
-            'enchant',
+        install_requires = [
+            'pyenchant',
             'html2text',
             'pytz',
         ],
