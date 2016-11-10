@@ -1,0 +1,7 @@
+*.pyc
+*.egg-info
+build/
+gc.html
+new.html
+default.html
+unsub.html

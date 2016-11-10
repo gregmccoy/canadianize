@@ -1,6 +1,6 @@
 import html2text
-from matthew import Matthew
-import urllib2
+from fix_emails.matthew import Matthew
+from urllib.request import urlopen
 
 class Job(object):
 
@@ -25,13 +25,13 @@ class Job(object):
         return matthew
 
     def url_email(self, url):
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         content = response.read()
         matthew = self.process_email(content)
         return matthew
 
     def url_article(self, url):
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         content = response.read()
         matthew = self.process_article(content)
         return matthew

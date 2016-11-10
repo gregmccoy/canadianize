@@ -1,5 +1,5 @@
 import argparse
-from job import Job
+from fix_emails.job import Job
 
 
 def read_file(infile, outfile, url, article, verbose, result):

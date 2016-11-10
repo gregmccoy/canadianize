@@ -1,17 +1,17 @@
-from setuptools import setup
+from distutils.core import setup
 
 setup(
-        name = 'versebg',
+        name = 'Canadianize',
         author = "Greg McCoy",
         author_email = "gregmccoy@gfa.org",
-        url = "",
-        version = '0.2.1',
-        packages=['ca'],
-        package_dir={'ca': 'src/ca'},
-        package_data={'ca': 'data/*'},
-        scripts=['ca'],
+        url = "https://github.com/gregmccoy/canadianize",
+        version = '0.3.1',
         license='MIT',
         long_description=open('README.md').read(),
-
-        install_requires = ['enchant', 'html2text']
+        requires = [
+            'enchant',
+            'html2text',
+            'pytz',
+        ],
+        packages=['fix_emails'],
     )

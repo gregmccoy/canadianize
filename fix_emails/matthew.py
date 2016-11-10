@@ -132,25 +132,26 @@ class Matthew(object):
                     except:
                         print("Breaking")
                         break
-            index = self.content.find(old, index + len(old))
+                index = self.content.find(old, index + len(old))
 
 
     def change(self):
-	for row in self.replaces:
-	    if self.raw.find(row[0]) != -1:
-		if self.debug:
-		    print(('+ Input Type = ' + str(self.input_type)))
-		if self.input_type == "article":
-		    print(('* Replacing "' + row[0] + '" with "' + row[1] + '" *'))
-		    self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
-		else:
+        print("Hello")
+        for row in self.replaces:
+            if self.raw.find(row[0]) != -1:
+                if self.debug:
+                    print(('+ Input Type = ' + str(self.input_type)))
+                if self.input_type == "article":
+                    print(('* Replacing "' + row[0] + '" with "' + row[1] + '" *'))
+                    self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
+                else:
                     self.safe_replace(row[0], row[1])
-		self.raw = self.raw.replace(row[0], row[1])
-		if self.debug:
-		    print(("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0]))))
-		    print(("+ Search Content for replaced content Result = " + str(self.content.find(row[0]))))
-		    print("\n")
-	return 0
+                self.raw = self.raw.replace(row[0], row[1])
+                if self.debug:
+                    print(("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0]))))
+                    print(("+ Search Content for replaced content Result = " + str(self.content.find(row[0]))))
+                    print("\n")
+        return 0
 
     def fix_spelling(self):
         dictCA = enchant.DictWithPWL("en_CA", "data/words")
