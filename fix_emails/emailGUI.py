@@ -1,6 +1,7 @@
 from qtgui import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from fix_emails.job import Job
+import os
 
 class EmailsGUI(Ui_MainWindow):
 
@@ -28,7 +29,8 @@ class EmailsGUI(Ui_MainWindow):
         self.writeResults(obj)
 
         self.HTMLEdit.appendPlainText(obj.get_content())
-        self.webView.setUrl(QtCore.QUrl("file://" + self.outfile))
+        self.webView.setUrl(QtCore.QUrl("file://" + os.getcwd() + "/" + self.outfile))
+        self.webViewResult.setUrl(QtCore.QUrl("file://" + os.getcwd() + "/data/result.html"))
 
 
     def writeOutfile(self, obj):
@@ -51,6 +53,20 @@ class EmailsGUI(Ui_MainWindow):
         self.webView.setUrl(QtCore.QUrl("file://" + self.filename))
 
 
+class OutLog:
+    def __init__(self, edit, out=None, color=None):
+        """(edit, out=None, color=None) -> can write stdout, stderr to a
+        QTextEdit.
+        edit = QTextEdit
+        out = alternate stream ( can be the original sys.stdout )
+        color = alternate color (i.e. color stderr a different color)
+        """
+        self.edit = edit
+        self.out = None
+        self.color = color
+
+    def write(self, m):
+        self.edit.insertPlainText(m)
 
 
 if __name__ == "__main__":
@@ -61,4 +77,5 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     ui.initGUI(MainWindow)
+    sys.stdout = OutLog(ui.plainTextEdit, sys.stdout)
     sys.exit(app.exec_())
