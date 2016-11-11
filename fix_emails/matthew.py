@@ -96,7 +96,7 @@ class Matthew(object):
     def replace_source_codes(self):
         codes = self.get_source_codes()
         for code in codes:
-            choice = raw_input("Replace Source Code - " + str(code) + " ? (y/n)")
+            choice = input("Replace Source Code - " + str(code) + " ? (y/n)")
             if choice == "y":
                 source = input("Enter new source code: ")
                 self.content = self.content.replace(code, source)
@@ -167,7 +167,7 @@ class Matthew(object):
                             if counter > 10:
                                 break;
                         print("Don't replace - q")
-                        choice = raw_input("Select Replacment\n")
+                        choice = input("Select Replacment\n")
                         if choice != "q":
                             if self.input_type == "article":
                                 new_word = str(new[int(choice)]).decode('utf-8')
