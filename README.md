@@ -3,7 +3,7 @@ Matthew Script
 This script automatically replaces text in American emails with the Canadian equivalent, this includes phone number, address, links and changes American spelling to the Canadian spelling.
 
 ```
-usage: ca.py [-h] [-f input] [-o outfile] [-u url] [-a]
+usage: run.py [-h] [-f input] [-o outfile] [-u url] [-a]
 
 optional arguments:
   -h, --help  show this help message and exit
@@ -12,8 +12,3 @@ optional arguments:
   -u url      specifies the input is a url
   -a          used to check an article
 ```
-
-Install file probably doesn't work yet
-
-
-Matthew run `python ca.py -f new.html`

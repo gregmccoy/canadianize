@@ -1,35 +1,36 @@
 from datetime import datetime, timedelta
+from fix_emails.utils import readConf, readCSV, get_image_ignores
 import pytz
-import csv
 import enchant
 import re
+
 
 class Matthew(object):
 
     def __init__(self, content=None, raw=None, input_type="email", verbose=False):
         self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
-        tz = pytz.timezone('Canada/Eastern')
-        now = pytz.utc.localize(datetime.utcnow())
-        self.is_dst = now.astimezone(tz).dst() != timedelta(0)
-        replaces = []
-        with open("data/replace.csv") as f:
-            reader = csv.reader(f, delimiter='|')
-            for row in reader:
-                replaces.append(row)
-        self.replaces = replaces
         self.content = content
         self.raw = raw
         self.input_type = input_type
         self.debug = verbose
+        self.country = readConf("country")
+
+        replaces = readCSV('data/replace_{}.csv'.format(self.country), '|')
+        self.replaces = replaces
+
+        tz = pytz.timezone('Canada/Eastern')
+        now = pytz.utc.localize(datetime.utcnow())
+        self.is_dst = now.astimezone(tz).dst() != timedelta(0)
 
     def set_content(self, content):
         self.content = content
-        return 0
+
     def get_content(self):
         return self.content
+
     def set_raw(self, raw):
         self.raw = raw
-        return 0
+
     def get_raw(self):
         return self.raw
 
@@ -40,12 +41,9 @@ class Matthew(object):
         self.content = self.content.replace(header, line)
         return self.content
 
+
     def links(self):
-        replaces = []
-        with open("data/links.csv") as f:
-            reader = csv.reader(f, delimiter='|')
-            for row in reader:
-                replaces.append(row)
+        replaces = readCSV('data/links_{}.csv'.format(self.country), '|')
         for row in replaces:
             if self.content.find(row[0]) != -1:
                 print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
@@ -54,13 +52,13 @@ class Matthew(object):
 
 
     def fix_css(self):
-        for key, value in self.ignores.iteritems():
+        for key, value in self.ignores.items():
             self.content = self.content.replace(value, key)
         return self.content
 
 
     def ignore_css(self):
-        for key, value in self.ignores.iteritems():
+        for key, value in self.ignores.items():
             self.content = self.content.replace(key, value)
         return self.content
 
@@ -136,7 +134,6 @@ class Matthew(object):
 
 
     def change(self):
-        print("Hello")
         for row in self.replaces:
             if self.raw.find(row[0]) != -1:
                 if self.debug:
@@ -194,42 +191,9 @@ class Matthew(object):
 
     def get_images(self):
         images = []
-        ignore_images = [
-            "http://www.gfamedia.org/email/digest/218/email-digest-header-transforming-communities.gif",
-            "http://www.gfamedia.org/email/digest/email-digest-header.gif",
-            "http://www.gfamedia.org/email/digest/gospel-for-asia-digest-break.gif",
-            "http://www.gfamedia.org/email/digest/208/digest-whiteside.gif",
-            "http://www.gfamedia.org/email/digest/208/digest-whiteside-right.gif",
-            "http://www.gfamedia.org/email/digest/facebook-icon-email.gif",
-            "http://www.gfamedia.org/email/digest/twitter-icon-email.gif",
-            "http://www.gfamedia.org/email/digest/pinterest-icon-email.gif",
-            "http://www.gfamedia.org/email/digest/facebook-icon-email.png",
-            "http://www.gfamedia.org/email/digest/twitter-icon-email.png",
-            "http://www.gfamedia.org/email/digest/pinterest-icon-email.png",
-            "http://www.gfamedia.org/email/digest/youtube-icon-email.png",
-            "http://www.gfamedia.org/email/digest/sponsor-footer-1.jpg",
-            "http://www.gfamedia.org/email/digest/sponsor-footer-2.jpg",
-            "http://www.gfamedia.org/email/digest/sponsor-footer-3.jpg",
-            "http://www.gfamedia.org/ca/email/digest/gospel-for-asia-digest-header-3.gif",
-            "http://www.gfamedia.org/ca/email/digest/tagline.gif",
-            "http://www.gfamedia.org/ca/email/digest/share-fb.gif",
-            "http://www.gfamedia.org/ca/email/digest/share-twitter.gif",
-            "http://www.gfamedia.org/ca/email/digest/find-fb.gif",
-            "http://www.gfamedia.org/ca/email/digest/find-twitter.gif",
-            "http://www.gfamedia.org/ca/email/digest/find-pin.gif",
-            "http://www.gfamedia.org/ca/email/digest/find-wp.gif",
-            "http://gfamedia.org/email/digest/twitter-icon-email.gif",
-            "http://gfamedia.org/email/pray/pray-header.gif",
-            "http://gfamedia.org/email/pray/pray-footer.gif",
-            "http://www.gfamedia.org/email/icon_kpsig.gif",
-            "http://gfamedia.org/email/pray/pray-left.gif",
-            "http://gfamedia.org/email/pray/pray-right.gif",
-            "http://www.gfamedia.org/email/nolonger/outreach/bullet.jpg",
-            "http://www.gfamedia.org/email/digest/1x1.jpg",
-        ]
-        code = self.content
-        for i in range(0, code.count("<img")):
-            image = code.split("<img")[i + 1].replace('alt="-->"', '').split(">")[0]
+        ignore_images = get_image_ignores()
+        for i in range(0, self.content.count("<img")):
+            image = self.content.split("<img")[i + 1].replace('alt="-->"', '').split(">")[0]
 
             try:
                 image_url = image.split('src="')[1].split('"')[0]

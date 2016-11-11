@@ -12,7 +12,7 @@ class Job(object):
         h = html2text.HTML2Text()
         h.ignore_links = True
         h.ignore_images = True
-        return h.handle(content.decode('utf8'))
+        return h.handle(content)
 
     def read_file(self, infile):
         with open(infile, 'r') as f:
