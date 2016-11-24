@@ -88,6 +88,7 @@ class Matthew(object):
     def get_source_codes(self):
         motivs = []
         for i in range(0, self.content.count("motiv=")):
+            #Gets the source code based on motiv=
             motiv = self.content.split("motiv=")[i + 1].split(" ")[0].split("&")[0].split('"')[0]
             motivs.append(motiv)
         return sorted(list(set(motivs)))
@@ -130,7 +131,7 @@ class Matthew(object):
                     except:
                         print("Breaking")
                         break
-                index = self.content.find(old, index + len(old))
+            index = self.content.find(old, index + len(old))
 
 
     def change(self):

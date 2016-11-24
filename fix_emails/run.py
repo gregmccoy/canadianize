@@ -33,8 +33,6 @@ def read_file(infile, outfile, url, article, verbose, result):
             obj = job.run_results(outfile)
             print_results(obj, job)
 
-    #webbrowser.open('file://' + os.path.realpath("data/result.html"), new=2)
-    #webbrowser.open('file://' + os.path.realpath(outfile), new=2)
     print("Goodbye!")
 
 def print_outfile(outfile, obj):
