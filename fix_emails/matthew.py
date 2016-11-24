@@ -168,10 +168,17 @@ class Matthew(object):
                             if counter > 10:
                                 break;
                         print("Don't replace - q")
-                        choice = input("Select Replacment\n")
+
+                        choice = ""
+                        if self.input_type == "qt":
+                            print("Select Replacement\n")
+                            choice = 1
+                        else:
+                            choice = input("Select Replacment\n")
+
                         if choice != "q":
                             if self.input_type == "article":
-                                new_word = str(new[int(choice)]).decode('utf-8')
+                                new_word = str(new[int(choice)])
                                 self.content = self.content.replace(str(word), "<font color='red'>" + str(new_word) + "</font>")
                             else:
                                 self.safe_replace(word, new[int(choice)])

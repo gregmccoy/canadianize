@@ -4,8 +4,9 @@ from urllib.request import urlopen
 
 class Job(object):
 
-    def __init__(self, verbose):
+    def __init__(self, verbose, input_type="email"):
         self.debug = verbose
+        self.input_type = input_type
 
 
     def get_raw(self, content):
@@ -21,7 +22,7 @@ class Job(object):
 
     def html_email(self, infile):
         content = self.read_file(infile)
-        matthew = self.process_email(content)
+        matthew = self.process_email(content, input_type)
         return matthew
 
     def url_email(self, url):
@@ -37,7 +38,7 @@ class Job(object):
         return matthew
 
     def process_email(self, content):
-        matthew = Matthew(content, self.get_raw(content), verbose=self.debug)
+        matthew = Matthew(content, self.get_raw(content), input_type=self.input_type, verbose=self.debug)
         matthew.ignore_css()
         matthew.links()
         matthew.change()

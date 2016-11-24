@@ -10,7 +10,7 @@ class EmailsGUI(Ui_MainWindow):
         self.filename = ""
         self.outfile = "default.html"
         self.html = ""
-        self.job = Job(False)
+        self.job = Job(False, input_type="qt")
 
     def initGUI(self, MainWindow):
         print("Setting up EmailGUI")
@@ -47,10 +47,11 @@ class EmailsGUI(Ui_MainWindow):
 
     def fileOpen(self):
         self.filename, _ = QtWidgets.QFileDialog.getOpenFileName(self.window, 'Open File', ".")
-        with open(self.filename, 'r+') as f:
-            self.html = f.read()
-        self.HTMLEdit.appendPlainText(self.html)
-        self.webView.setUrl(QtCore.QUrl("file://" + self.filename))
+        if self.filename:
+            with open(self.filename, 'r+') as f:
+                self.html = f.read()
+            self.HTMLEdit.appendPlainText(self.html)
+            self.webView.setUrl(QtCore.QUrl("file://" + self.filename))
 
 
 class OutLog:
