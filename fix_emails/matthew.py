@@ -97,11 +97,15 @@ class Matthew(object):
     def replace_source_codes(self):
         codes = self.get_source_codes()
         for code in codes:
-            choice = input("Replace Source Code - " + str(code) + " ? (y/n)")
-            if choice == "y":
-                source = input("Enter new source code: ")
-                self.content = self.content.replace(code, source)
-                self.raw.replace(code, source)
+            if self.input_type == "qt":
+                print("Replacing source codes is unsupported in qt\n")
+                break
+            else:
+                choice = input("Replace Source Code - " + str(code) + " ? (y/n)")
+                if choice == "y":
+                    source = input("Enter new source code: ")
+                    self.content = self.content.replace(code, source)
+                    self.raw.replace(code, source)
         return 0
 
 
