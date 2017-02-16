@@ -22,7 +22,7 @@ class Job(object):
 
     def html_email(self, infile):
         content = self.read_file(infile)
-        matthew = self.process_email(content, input_type)
+        matthew = self.process_email(content)
         return matthew
 
     def url_email(self, url):
@@ -49,7 +49,7 @@ class Job(object):
             print("+ Test Raw for replaced content Result = " + str(matthew.get_raw().find("center")))
         matthew.preheader()
         matthew.times()
-        #matthew.replace_source_codes()
+        matthew.replace_source_codes()
         matthew.fix_spelling()
         matthew.fix_css()
         return matthew
