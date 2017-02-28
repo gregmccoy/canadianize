@@ -156,17 +156,24 @@ class Matthew(object):
         return 0
 
     def fix_spelling(self):
-        dictCA = enchant.DictWithPWL("en_CA", "data/words")
-        dictUS = enchant.DictWithPWL("en_US", "data/words")
+        if self.country == "US":
+            dict_check = enchant.DictWithPWL("en_CA", "data/words")
+            dict_correct = enchant.DictWithPWL("en_US", "data/words")
+        else:
+            dict_correct = enchant.DictWithPWL("en_CA", "data/words")
+            dict_check = enchant.DictWithPWL("en_US", "data/words")
         wordlist = re.sub("[^\w]", " ",  self.raw).split()
         done = []
         for word in wordlist:
             word = word.replace("_", "")
             if not word.isdigit() and len(word) > 0:
-                if not dictCA.check(word) and dictUS.check(word):
+                if not dict_correct.check(word) and dict_check.check(word):
                     if not word in done:
-                        new = dictCA.suggest(word)
-                        print("Non-Canadian Word - *" + word + "* Replace with? ")
+                        new = dict_correct.suggest(word)
+                        if self.country == "US":
+                            print("Non-American Word - *" + word + "* Replace with? ")
+                        else:
+                            print("Non-Canadian Word - *" + word + "* Replace with? ")
                         for counter, option in enumerate(new):
                             print(str(counter) + " - " + option)
                             if counter > 10:
