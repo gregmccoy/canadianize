@@ -20,9 +20,9 @@ class Job(object):
             content = f.read()
         return content
 
-    def html_email(self, infile):
+    def html_email(self, infile, source_code=None):
         content = self.read_file(infile)
-        matthew = self.process_email(content)
+        matthew = self.process_email(content, source_code=source_code)
         return matthew
 
     def url_email(self, url):
@@ -37,8 +37,8 @@ class Job(object):
         matthew = self.process_article(content)
         return matthew
 
-    def process_email(self, content):
-        matthew = Matthew(content, self.get_raw(content), input_type=self.input_type, verbose=self.debug)
+    def process_email(self, content, source_code=None):
+        matthew = Matthew(content, self.get_raw(content), input_type=self.input_type, verbose=self.debug, source_code=source_code)
         matthew.ignore_css()
         matthew.links()
         matthew.change()
