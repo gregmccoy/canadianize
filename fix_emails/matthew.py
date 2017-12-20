@@ -7,13 +7,14 @@ import re
 
 class Matthew(object):
 
-    def __init__(self, content=None, raw=None, input_type="email", verbose=False):
+    def __init__(self, content=None, raw=None, input_type="email", verbose=False, source_code=None):
         self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
         self.content = content
         self.raw = raw
         self.input_type = input_type
         self.debug = verbose
         self.country = readConf("country")
+        self.source_code = source_code
 
         replaces = readCSV('data/replace_{}.csv'.format(self.country), '|')
         self.replaces = replaces
@@ -48,7 +49,6 @@ class Matthew(object):
             if self.content.find(row[0]) != -1:
                 print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
                 self.content = self.content.replace(row[0], row[1])
-        return 0
 
 
     def fix_css(self):
@@ -70,19 +70,19 @@ class Matthew(object):
 
 
     def times(self):
-        if self.content.find("CST") != -1 or self.content.find("CDT") != -1:
-            print("* Handling CST/CDT")
-        if self.is_dst:
-            self.content = self.content.replace(" CST", " EDT")
-            self.content = self.content.replace(" CDT", " EDT")
-            self.raw = self.raw.replace(" CST", " EDT")
-            self.raw = self.raw.replace(" CDT", " EDT")
-        else:
-            self.content = self.content.replace(" CST", " EST")
-            self.content = self.content.replace(" CDT", " EST")
-            self.raw = self.raw.replace(" CST", " EST")
-            self.raw = self.raw.replace(" CDT", " EST")
-        return 0
+        if self.country == "CA":
+            if self.content.find("CST") != -1 or self.content.find("CDT") != -1:
+                print("* Handling CST/CDT")
+            if self.is_dst:
+                self.content = self.content.replace(" CST", " EDT")
+                self.content = self.content.replace(" CDT", " EDT")
+                self.raw = self.raw.replace(" CST", " EDT")
+                self.raw = self.raw.replace(" CDT", " EDT")
+            else:
+                self.content = self.content.replace(" CST", " EST")
+                self.content = self.content.replace(" CDT", " EST")
+                self.raw = self.raw.replace(" CST", " EST")
+                self.raw = self.raw.replace(" CDT", " EST")
 
 
     def get_source_codes(self):
@@ -98,15 +98,15 @@ class Matthew(object):
         codes = self.get_source_codes()
         for code in codes:
             if self.input_type == "qt":
-                print("Replacing source codes is unsupported in qt\n")
-                break
+                print("Replacing {} with {}".format(code, self.source_code))
+                self.content = self.content.replace(code, self.source_code)
+                self.raw.replace(code, self.source)
             else:
                 choice = input("Replace Source Code - " + str(code) + " ? (y/n)")
                 if choice == "y":
                     source = input("Enter new source code: ")
                     self.content = self.content.replace(code, source)
                     self.raw.replace(code, source)
-        return 0
 
 
     def safe_replace(self, old, new):
@@ -153,7 +153,6 @@ class Matthew(object):
                     print(("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0]))))
                     print(("+ Search Content for replaced content Result = " + str(self.content.find(row[0]))))
                     print("\n")
-        return 0
 
     def fix_spelling(self):
         if self.country == "US":
@@ -194,7 +193,6 @@ class Matthew(object):
                             else:
                                 self.safe_replace(word, new[int(choice)])
                                 done.append(word)
-        return 0
 
     def get_links(self):
         links = []
@@ -235,12 +233,10 @@ class Matthew(object):
     def remove_images(self):
         while self.content.find("<img") != -1:
             self.content = self.content.replace(self.content[self.content.find("<img"):(self.content.find(">", self.content.find("<img"))+1)], "")
-        return 0
 
     def remove_js(self):
         while self.content.find("<script") != -1:
             self.content = self.content.replace(self.content[self.content.find("<script"):(self.content.find("</script>", self.content.find("<script"))+9)], "")
-        return 0
 
     def make_table(self, items):
         table_str = ""

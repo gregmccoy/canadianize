@@ -2,6 +2,7 @@ from qtgui import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from fix_emails.job import Job
 import os
+import csv
 
 class EmailsGUI(Ui_MainWindow):
 
@@ -11,17 +12,24 @@ class EmailsGUI(Ui_MainWindow):
         self.outfile = "default.html"
         self.html = ""
         self.job = Job(False, input_type="qt")
+        self.replace_items = self.getReplace("data/replace_CA.csv")
+
 
     def initGUI(self, MainWindow):
         print("Setting up EmailGUI")
         self.window = MainWindow
-        self.pushButton.clicked.connect(self.runClicked)
+        self.run_button.clicked.connect(self.runClicked)
         self.actionOpen.setShortcut("Ctrl+O")
         self.actionOpen.setStatusTip('Open File')
         self.actionOpen.triggered.connect(self.fileOpen)
+
+        for item in self.replace_items:
+            self.original_list.addItem(item[0])
+            self.replace_list.addItem(item[1])
         self.menuFile
 
     def runClicked(self):
+        source = self.source_text.text
         obj = self.job.html_email(self.filename)
         self.writeOutfile(obj)
 
@@ -31,6 +39,15 @@ class EmailsGUI(Ui_MainWindow):
         self.HTMLEdit.appendPlainText(obj.get_content())
         self.webView.setUrl(QtCore.QUrl("file://" + os.getcwd() + "/" + self.outfile))
         self.webViewResult.setUrl(QtCore.QUrl("file://" + os.getcwd() + "/data/result.html"))
+
+
+    def getReplace(self, list):
+        replace_items = []
+        with open(list, "r") as f:
+            replace_csv = csv.reader(f, delimiter='|')
+            for row in replace_csv:
+                replace_items.append(row)
+        return replace_items
 
 
     def writeOutfile(self, obj):
@@ -78,5 +95,5 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     ui.initGUI(MainWindow)
-    sys.stdout = OutLog(ui.plainTextEdit, sys.stdout)
+    sys.stdout = OutLog(ui.output_box, sys.stdout)
     sys.exit(app.exec_())
