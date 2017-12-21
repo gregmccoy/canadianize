@@ -7,13 +7,18 @@ import re
 
 class Matthew(object):
 
-    def __init__(self, content=None, raw=None, input_type="email", verbose=False, source_code=None):
+    def __init__(self, content=None, raw=None, input_type="email", verbose=False, source_code=None, country=None):
         self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
         self.content = content
         self.raw = raw
         self.input_type = input_type
         self.debug = verbose
-        self.country = readConf("country")
+
+        if not country:
+            self.country = readConf("country")
+        else:
+            self.country = country
+
         self.source_code = source_code
 
         replaces = readCSV('data/replace_{}.csv'.format(self.country), '|')
@@ -154,6 +159,7 @@ class Matthew(object):
                     print(("+ Search Content for replaced content Result = " + str(self.content.find(row[0]))))
                     print("\n")
 
+
     def fix_spelling(self):
         if self.country == "US":
             dict_check = enchant.DictWithPWL("en_CA", "data/words")
@@ -169,21 +175,22 @@ class Matthew(object):
                 if not dict_correct.check(word) and dict_check.check(word):
                     if not word in done:
                         new = dict_correct.suggest(word)
-                        if self.country == "US":
-                            print("Non-American Word - *" + word + "* Replace with? ")
-                        else:
-                            print("Non-Canadian Word - *" + word + "* Replace with? ")
-                        for counter, option in enumerate(new):
-                            print(str(counter) + " - " + option)
-                            if counter > 10:
-                                break;
-                        print("Don't replace - q")
-
                         choice = ""
+
                         if self.input_type == "qt":
-                            print("Select Replacement\n")
-                            choice = 1
+                            choice = 0
                         else:
+                            if self.country == "US":
+                                print("Non-American Word - *" + word + "* Replace with? ")
+                            else:
+                                print("Non-Canadian Word - *" + word + "* Replace with? ")
+
+                            for counter, option in enumerate(new):
+                                print(str(counter) + " - " + option)
+                                if counter > 10:
+                                    break;
+
+                            print("Don't replace - q")
                             choice = input("Select Replacment\n")
 
                         if choice != "q":
@@ -193,6 +200,7 @@ class Matthew(object):
                             else:
                                 self.safe_replace(word, new[int(choice)])
                                 done.append(word)
+
 
     def get_links(self):
         links = []

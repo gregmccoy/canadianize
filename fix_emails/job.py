@@ -20,9 +20,9 @@ class Job(object):
             content = f.read()
         return content
 
-    def html_email(self, infile, source_code=None):
+    def html_email(self, infile, source_code=None, country=None):
         content = self.read_file(infile)
-        matthew = self.process_email(content, source_code=source_code)
+        matthew = self.process_email(content, source_code=source_code, country=country)
         return matthew
 
     def url_email(self, url):
@@ -37,8 +37,8 @@ class Job(object):
         matthew = self.process_article(content)
         return matthew
 
-    def process_email(self, content, source_code=None):
-        matthew = Matthew(content, self.get_raw(content), input_type=self.input_type, verbose=self.debug, source_code=source_code)
+    def process_email(self, content, source_code=None, country=None):
+        matthew = Matthew(content, self.get_raw(content), input_type=self.input_type, verbose=self.debug, source_code=source_code, country=country)
         matthew.ignore_css()
         matthew.links()
         matthew.change()
@@ -49,7 +49,8 @@ class Job(object):
             print("+ Test Raw for replaced content Result = " + str(matthew.get_raw().find("center")))
         matthew.preheader()
         matthew.times()
-        matthew.replace_source_codes()
+        if source_code:
+            matthew.replace_source_codes()
         matthew.fix_spelling()
         matthew.fix_css()
         return matthew
