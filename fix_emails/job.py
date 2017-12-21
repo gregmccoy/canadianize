@@ -69,8 +69,8 @@ class Job(object):
         matthew.remove_images()
         return matthew
 
-    def run_results(self, content):
-        matthew = Matthew(self.read_file(content), self.get_raw(content), verbose=self.debug)
+    def run_results(self, content, input_type=None, country=None):
+        matthew = Matthew(self.read_file(content), self.get_raw(content), verbose=self.debug, input_type=input_type, country=country)
         return matthew
 
     def html_result(self, matthew):
