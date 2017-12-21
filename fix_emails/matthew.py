@@ -15,7 +15,10 @@ class Matthew(object):
         self.debug = verbose
 
         if not country:
-            self.country = readConf("country")
+            if self.input_type == "qt":
+                self.country = "CA"
+            else:
+                self.country = readConf("country")
         else:
             self.country = country
 
