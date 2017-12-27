@@ -182,7 +182,7 @@ class Matthew(object):
                         choice = ""
 
                         if self.input_type == "qt":
-                            choice = 0
+                            choice = "0"
                         else:
                             if self.country == "US":
                                 print("Non-American Word - *" + word + "* Replace with? ")
