@@ -108,7 +108,7 @@ class Matthew(object):
             if self.input_type == "qt":
                 print("Replacing {} with {}".format(code, self.source_code))
                 self.content = self.content.replace(code, self.source_code)
-                self.raw.replace(code, self.source)
+                self.raw.replace(code, self.source_code)
             else:
                 choice = input("Replace Source Code - " + str(code) + " ? (y/n)")
                 if choice == "y":
