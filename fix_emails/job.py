@@ -51,6 +51,7 @@ class Job(object):
         matthew.times()
         if source_code:
             matthew.replace_source_codes()
+        matthew.raw = self.get_raw(matthew.content)
         matthew.fix_spelling()
         matthew.fix_css()
         return matthew

@@ -8,7 +8,7 @@ import re
 class Matthew(object):
 
     def __init__(self, content=None, raw=None, input_type="email", verbose=False, source_code=None, country=None):
-        self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^"}
+        self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^", "<center>": "^CENTER_TAG^"}
         self.content = content
         self.raw = raw
         self.input_type = input_type
@@ -149,7 +149,7 @@ class Matthew(object):
 
     def change(self):
         for row in self.replaces:
-            if self.raw.find(row[0]) != -1:
+            if self.raw.lower().find(row[0].lower()) != -1:
                 if self.debug:
                     print(('+ Input Type = ' + str(self.input_type)))
                 if self.input_type == "article":
@@ -157,6 +157,7 @@ class Matthew(object):
                     self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
                 else:
                     self.safe_replace(row[0], row[1])
+                    self.safe_replace(row[0].title(), row[1].title())
                 self.raw = self.raw.replace(row[0], row[1])
                 if self.debug:
                     print(("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0]))))
