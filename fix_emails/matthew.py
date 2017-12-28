@@ -60,12 +60,23 @@ class Matthew(object):
 
 
     def fix_css(self):
+        count = 0
+        for style in self.styles:
+            self.content = self.content.replace("^STYLE_{}^".format(count), ''.join(style))
+            count += 1
         for key, value in self.ignores.items():
             self.content = self.content.replace(value, key)
         return self.content
 
 
     def ignore_css(self):
+        reg = re.compile("(\<style.*?\>)([\S\s]*?)(\<\/style\>)", re.MULTILINE)
+        self.styles = reg.findall(self.content)
+        count = 0
+        for style in self.styles:
+            self.content = reg.sub("^STYLE_{}^".format(count), self.content, count=1)
+            count += 1
+
         for key, value in self.ignores.items():
             self.content = self.content.replace(key, value)
         return self.content
