@@ -134,7 +134,10 @@ class Matthew(object):
             ignores = ["'", '"', "-", "#", "/", ":", "u", ";"]
             start_or_end = [" ", ">", "<", ",", ".", "?", "!"]
             beginchar = self.content[index - 1]
-            endchar = self.content[index + len(old)]
+            try:
+                endchar = self.content[index + len(old)]
+            except:
+                endchar = self.content[index + len(old) - 1]
             first = self.content[index]
             if beginchar in start_or_end or endchar in start_or_end:
                 if beginchar not in ignores and endchar not in ignores:
