@@ -162,6 +162,8 @@ class Matthew(object):
 
 
     def change(self):
+        # Fixing strange bug in raw generation
+        self.raw = self.raw.replace("-\nASIA", "-ASIA")
         for row in self.replaces:
             if self.raw.lower().find(row[0].lower()) != -1:
                 if self.debug:
