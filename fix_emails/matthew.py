@@ -131,8 +131,8 @@ class Matthew(object):
     def safe_replace(self, old, new):
         index = self.content.find(old)
         while index != -1:
-            ignores = ["'", '"', "-", "#", "/", ":", "u", ";"]
-            start_or_end = [" ", ">", "<", ",", ".", "?", "!"]
+            ignores = ["-", "#", "/", ":", "u", ";"]
+            start_or_end = [" ", ">", "<", ",", ".", "?", "!", "s", '"']
             beginchar = self.content[index - 1]
             try:
                 endchar = self.content[index + len(old)]
