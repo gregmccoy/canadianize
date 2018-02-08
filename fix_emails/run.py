@@ -27,7 +27,7 @@ def read_file(infile, outfile, url, article, verbose, result):
             obj = job.run_results(infile)
             print_results(obj, job)
         else:
-            obj = job.html_email(infile)
+            obj = job.html_email(infile, source_code=True)
             print_outfile(outfile, obj)
 
             obj = job.run_results(outfile)
