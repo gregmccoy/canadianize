@@ -13,6 +13,7 @@ class Matthew(object):
         self.raw = raw
         self.input_type = input_type
         self.debug = verbose
+        self.notifications = []
 
         if not country:
             if self.input_type == "qt":
@@ -55,7 +56,7 @@ class Matthew(object):
         replaces = readCSV('data/links_{}.csv'.format(self.country), '|')
         for row in replaces:
             if self.content.find(row[0]) != -1:
-                print('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
+                self.notifications.append('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
                 self.content = self.content.replace(row[0], row[1])
 
 
@@ -91,7 +92,7 @@ class Matthew(object):
     def times(self):
         if self.country == "CA":
             if self.content.find("CST") != -1 or self.content.find("CDT") != -1:
-                print("* Handling CST/CDT")
+                self.notifications.append('* Handling CST/CDT')
             if self.is_dst:
                 self.content = self.content.replace(" CST", " EDT")
                 self.content = self.content.replace(" CDT", " EDT")
@@ -117,7 +118,7 @@ class Matthew(object):
         codes = self.get_source_codes()
         for code in codes:
             if self.input_type == "qt":
-                print("Replacing {} with {}".format(code, self.source_code))
+                self.notifications.append("Replacing {} with {}".format(code, self.source_code))
                 self.content = self.content.replace(code, self.source_code)
                 self.raw.replace(code, self.source_code)
             else:
@@ -153,7 +154,7 @@ class Matthew(object):
 
                         repstr = self.content[sindex:eindex]
 
-                        print(('* Replacing "' + old + '" with "' + new + '" *'))
+                        self.notifications.append('* Replacing "' + old + '" with "' + new + '" *')
                         self.content = self.content.replace(repstr, startfive + str(new) + endfive, 1)
                     except:
                         print("Breaking")
@@ -167,18 +168,18 @@ class Matthew(object):
         for row in self.replaces:
             if self.raw.lower().find(row[0].lower()) != -1:
                 if self.debug:
-                    print(('+ Input Type = ' + str(self.input_type)))
+                    self.notifications.append('+ Input Type = ' + str(self.input_type))
                 if self.input_type == "article":
-                    print(('* Replacing "' + row[0] + '" with "' + row[1] + '" *'))
+                    self.notifications.append('* Replacing "' + row[0] + '" with "' + row[1] + '" *')
                     self.content = self.content.replace(row[0], "<font color='red'>" + str(row[1]) + "</font>")
                 else:
                     self.safe_replace(row[0], row[1])
                     self.safe_replace(row[0].title(), row[1].title())
                 self.raw = self.raw.replace(row[0], row[1])
                 if self.debug:
-                    print(("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0]))))
-                    print(("+ Search Content for replaced content Result = " + str(self.content.find(row[0]))))
-                    print("\n")
+                    self.notifications.append("+ Search Raw for replaced content Result = " + str(self.raw.find(row[0])))
+                    self.notifications.append("+ Search Content for replaced content Result = " + str(self.content.find(row[0])))
+                    self.notifications.append("\n")
 
 
     def fix_spelling(self):
