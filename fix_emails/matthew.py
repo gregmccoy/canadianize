@@ -8,7 +8,18 @@ import re
 class Matthew(object):
 
     def __init__(self, content=None, raw=None, input_type="email", verbose=False, source_code=None, country=None):
-        self.ignores= {"color=":"^CSS_COLOR^", '"center"':"^CSS_CENTER_1^", "'center'":"^CSS_CENTER_2^", "mygfa.org":"^MYGFA^", "<center>": "^CENTER_TAG^"}
+        self.ignores= {
+            "color=":"^CSS_COLOR^",
+            '"center"':"^CSS_CENTER_1^",
+            "'center'":"^CSS_CENTER_2^",
+            "mygfa.org":"^MYGFA^",
+            "<center>": "^CENTER_TAG^",
+            "&nbsp;": "^NBSP^",
+            "&zwnj;": "^ZWNJ^",
+            "&ndash;": "^NDASH^",
+            "gfa.org.nz": "^GFANZ^"
+        }
+
         self.content = content
         self.raw = raw
         self.input_type = input_type
